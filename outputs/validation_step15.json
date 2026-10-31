@@ -1,0 +1,193 @@
+{
+  "seed": 42,
+  "primary": "VTOP5",
+  "configs": {
+    "h2_c": 0.5,
+    "mf": {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 0.3
+    },
+    "ppr_alpha": 0.3,
+    "ar_mode": "max",
+    "ew": [
+      10,
+      0.5
+    ]
+  },
+  "windows": {
+    "short": "weeks 16-20",
+    "long": "weeks 11-20"
+  },
+  "users": {
+    "universe": 4813,
+    "tune": 2399,
+    "report": 2400,
+    "fit_all_with_vtop5": 4643
+  },
+  "best_iterations": {
+    "short": {
+      "A": 185,
+      "B": 82
+    },
+    "long": {
+      "A": 174,
+      "B": 110
+    }
+  },
+  "table": {
+    "A": {
+      "a_5w_fit_5w_infer": {
+        "V300": 0.6760501157407407,
+        "V900": 0.6217817493496841,
+        "VHALF": 0.5863730994152047,
+        "VTOP5": 0.39366192992478344
+      },
+      "b_5w_fit_10w_infer": {
+        "V300": 0.6774788194444444,
+        "V900": 0.6224073299888516,
+        "VHALF": 0.5894107602339183,
+        "VTOP5": 0.40056007807293154
+      },
+      "ref_10w_fit_10w_infer": {
+        "V300": 0.6818581018518518,
+        "V900": 0.6280525362318841,
+        "VHALF": 0.5953506432748538,
+        "VTOP5": 0.40469889555365135
+      },
+      "h2_missing_users": {
+        "a_weeks_16_20": 96,
+        "b_weeks_11_20": 48,
+        "eval_users_with_vtop5": 2334
+      }
+    },
+    "B": {
+      "a_5w_fit_5w_infer": {
+        "V300": 0.6746348015376777,
+        "V900": 0.6200944537502326,
+        "VHALF": 0.5904311809685642,
+        "VTOP5": 0.39405634955006974
+      },
+      "b_5w_fit_10w_infer": {
+        "V300": 0.680435250798944,
+        "V900": 0.626355853340778,
+        "VHALF": 0.5983400594732371,
+        "VTOP5": 0.40019164140320485
+      },
+      "ref_10w_fit_10w_infer": {
+        "V300": 0.6885058589226993,
+        "V900": 0.6355418295179602,
+        "VHALF": 0.6055579156046446,
+        "VTOP5": 0.4064692507579038
+      },
+      "h2_missing_users": {
+        "a_weeks_16_20": 117,
+        "b_weeks_11_20": 60,
+        "eval_users_with_vtop5": 2309
+      }
+    }
+  },
+  "bootstrap_b_minus_a_vtop5": {
+    "A": {
+      "n_users": 2334,
+      "mean_diff": 0.006898148148148148,
+      "ci95": [
+        0.0029635639817195097,
+        0.010829498119584882
+      ]
+    },
+    "B": {
+      "n_users": 2309,
+      "mean_diff": 0.006135291853135076,
+      "ci95": [
+        0.0021457280689090997,
+        0.010028150714595062
+      ]
+    },
+    "pooled": {
+      "n_users": 4643,
+      "mean_diff": 0.00651877378131955,
+      "ci95": [
+        0.003572633235216694,
+        0.009403341649316771
+      ]
+    }
+  },
+  "bootstrap_b_minus_a_robustness": {
+    "V300": {
+      "n_users": 4799,
+      "mean_diff": 0.0036141209974300207,
+      "ci95": [
+        0.0005032992984649588,
+        0.006839089740918242
+      ]
+    },
+    "V900": {
+      "n_users": 4780,
+      "mean_diff": 0.0034411320316132033,
+      "ci95": [
+        0.00023223645978614582,
+        0.006683451011157601
+      ]
+    },
+    "VHALF": {
+      "n_users": 4729,
+      "mean_diff": 0.005462453889711239,
+      "ci95": [
+        0.0023266267827353683,
+        0.008684148927421814
+      ]
+    },
+    "VTOP5": {
+      "n_users": 4643,
+      "mean_diff": 0.00651877378131955,
+      "ci95": [
+        0.003727977600689209,
+        0.00937988489243066
+      ]
+    }
+  },
+  "rule": "(b) beats (a) on VTOP5 in BOTH folds and the pooled paired-bootstrap 95% CI of (b)-(a) excludes zero -> final run = per-week reranker trained on weeks 11-20 features, applied to features and candidates from weeks 11-30; otherwise per-week reranker applied to weeks 21-30 as in step 11.",
+  "decision": {
+    "b_beats_a_in_both_folds": true,
+    "pooled_ci_excludes_zero": true,
+    "branch": "long_window"
+  },
+  "final_model": {
+    "fit_users": 4643,
+    "trees": 142,
+    "fold_best_iterations_11_20_fit": {
+      "A": 174,
+      "B": 110
+    }
+  },
+  "final": {
+    "branch": "long_window",
+    "feature_window_weeks": 20,
+    "target_weeks": 12,
+    "file": "outputs\\submissions\\submission_STEP15.csv",
+    "header_ok": true,
+    "rows": 1260,
+    "user_order_ok": true,
+    "five_distinct_ids": true,
+    "all_ids_in_final_pool": true,
+    "users_without_component_data": {
+      "H2": 5,
+      "PPR": 2,
+      "MF": 2,
+      "AR": 2,
+      "EW": 1
+    },
+    "repeat_share_train_positive": 0.9744444444444444,
+    "share_of_ids_shared_with_STEP7_all": 0.8152380952380951,
+    "share_of_users_with_identical_list": 0.30317460317460315
+  },
+  "runtime_s": 247.9,
+  "laps_s": {
+    "setup": 51.9,
+    "features_11-20": 94.2,
+    "features_16-20": 129.8,
+    "validation_fits": 178.2,
+    "final": 247.9
+  }
+}
