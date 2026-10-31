@@ -1,0 +1,1985 @@
+{
+  "environment": {
+    "python": "3.11.9",
+    "pandas": "2.3.3",
+    "numpy": "2.3.3",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "cpu_count": 4,
+    "ram_total_gb": 7.65
+  },
+  "files": {
+    "dataset11-30.csv": {
+      "rows": 5821987,
+      "columns": [
+        "user_id",
+        "vsetv_id",
+        "start_time",
+        "stop_time",
+        "duraton"
+      ],
+      "dtypes_after_load": {
+        "user_id": "uint64",
+        "vsetv_id": "int32",
+        "start_time": "datetime64[ns]",
+        "stop_time": "datetime64[ns]",
+        "duraton": "int64"
+      },
+      "null_counts": {
+        "user_id": 0,
+        "vsetv_id": 0,
+        "start_time": 0,
+        "stop_time": 0,
+        "duraton": 0
+      }
+    },
+    "export_arh_11-20-final.csv": {
+      "rows": 1074235,
+      "columns": [
+        "channel_id",
+        "channel_title",
+        "start_time",
+        "duration",
+        "tv_show_title",
+        "tv_show_id",
+        "tv_show_category",
+        "tv_show_genre_1",
+        "tv_show_genre_2",
+        "tv_show_genre_3",
+        "year_of_production",
+        "director",
+        "actors"
+      ],
+      "dtypes_after_load": {
+        "channel_id": "int64",
+        "channel_title": "object",
+        "start_time": "datetime64[ns]",
+        "duration": "int64",
+        "tv_show_title": "object",
+        "tv_show_id": "int64",
+        "tv_show_category": "object",
+        "tv_show_genre_1": "object",
+        "tv_show_genre_2": "object",
+        "tv_show_genre_3": "object",
+        "year_of_production": "object",
+        "director": "object",
+        "actors": "object"
+      },
+      "null_counts": {
+        "channel_id": 0,
+        "channel_title": 0,
+        "start_time": 0,
+        "duration": 0,
+        "tv_show_title": 0,
+        "tv_show_id": 0,
+        "tv_show_category": 0,
+        "tv_show_genre_1": 620089,
+        "tv_show_genre_2": 928009,
+        "tv_show_genre_3": 1054059,
+        "year_of_production": 959500,
+        "director": 974050,
+        "actors": 973861
+      }
+    },
+    "export_arh_21-30-final.csv": {
+      "rows": 1074394,
+      "columns": [
+        "channel_id",
+        "channel_title",
+        "start_time",
+        "duration",
+        "tv_show_title",
+        "tv_show_id",
+        "tv_show_category",
+        "tv_show_genre_1",
+        "tv_show_genre_2",
+        "tv_show_genre_3",
+        "year_of_production",
+        "director",
+        "actors"
+      ],
+      "dtypes_after_load": {
+        "channel_id": "int64",
+        "channel_title": "object",
+        "start_time": "datetime64[ns]",
+        "duration": "int64",
+        "tv_show_title": "object",
+        "tv_show_id": "int64",
+        "tv_show_category": "object",
+        "tv_show_genre_1": "object",
+        "tv_show_genre_2": "object",
+        "tv_show_genre_3": "object",
+        "year_of_production": "object",
+        "director": "object",
+        "actors": "object"
+      },
+      "null_counts": {
+        "channel_id": 0,
+        "channel_title": 0,
+        "start_time": 0,
+        "duration": 0,
+        "tv_show_title": 0,
+        "tv_show_id": 0,
+        "tv_show_category": 0,
+        "tv_show_genre_1": 616370,
+        "tv_show_genre_2": 924020,
+        "tv_show_genre_3": 1050668,
+        "year_of_production": 954382,
+        "director": 969487,
+        "actors": 968834
+      }
+    },
+    "export_arh_31-42-final.csv": {
+      "rows": 1295378,
+      "columns": [
+        "channel_id",
+        "channel_title",
+        "start_time",
+        "duration",
+        "tv_show_title",
+        "tv_show_id",
+        "tv_show_category",
+        "tv_show_genre_1",
+        "tv_show_genre_2",
+        "tv_show_genre_3",
+        "year_of_production",
+        "director",
+        "actors"
+      ],
+      "dtypes_after_load": {
+        "channel_id": "int64",
+        "channel_title": "object",
+        "start_time": "datetime64[ns]",
+        "duration": "int64",
+        "tv_show_title": "object",
+        "tv_show_id": "int64",
+        "tv_show_category": "object",
+        "tv_show_genre_1": "object",
+        "tv_show_genre_2": "object",
+        "tv_show_genre_3": "object",
+        "year_of_production": "object",
+        "director": "object",
+        "actors": "object"
+      },
+      "null_counts": {
+        "channel_id": 0,
+        "channel_title": 0,
+        "start_time": 0,
+        "duration": 0,
+        "tv_show_title": 0,
+        "tv_show_id": 0,
+        "tv_show_category": 0,
+        "tv_show_genre_1": 737871,
+        "tv_show_genre_2": 1113598,
+        "tv_show_genre_3": 1266621,
+        "year_of_production": 1151706,
+        "director": 1170189,
+        "actors": 1169519
+      }
+    },
+    "submission.csv": {
+      "rows": 1260,
+      "columns": [
+        "user_id",
+        "tv_show_id"
+      ],
+      "dtypes_after_load": {
+        "user_id": "object",
+        "tv_show_id": "object"
+      },
+      "null_counts": {
+        "user_id": 0,
+        "tv_show_id": 0
+      }
+    }
+  },
+  "time_formats": {
+    "view_log": {
+      "format": "%Y-%m-%d %H:%M:%S",
+      "string_lengths": {
+        "start_time": {
+          "19": 5821987
+        },
+        "stop_time": {
+          "19": 5821987
+        }
+      },
+      "unparsed_start": 0,
+      "unparsed_stop": 0,
+      "timezone_in_string": false
+    },
+    "schedules": {
+      "start_time_format": "%d.%m.%Y %H:%M:%S",
+      "timezone_in_string": false,
+      "per_file": {
+        "11-20": {
+          "start_time_str_lengths": {
+            "19": 1074235
+          },
+          "start_time_unparsed": 0,
+          "share_next_start_eq_start_plus_duration_s": 0.9996293657777964,
+          "share_gap_negative_overlap": 1.8624835286612934e-06,
+          "share_gap_positive": 0.0003687717386749361,
+          "gap_seconds_quantiles": {
+            "min": -2400.0,
+            "p10": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 1209600.0
+          },
+          "duration_seconds_quantiles": {
+            "min": 0.0,
+            "p10": 300.0,
+            "p25": 600.0,
+            "p50": 1500.0,
+            "p75": 3000.0,
+            "p90": 5400.0,
+            "p99": 12600.0,
+            "max": 86400.0
+          },
+          "duration_all_multiples_of_60": true,
+          "exact_duplicate_rows": 0,
+          "duplicate_channel_start": 1
+        },
+        "21-30": {
+          "start_time_str_lengths": {
+            "19": 1074394
+          },
+          "start_time_unparsed": 0,
+          "share_next_start_eq_start_plus_duration_s": 0.9999953444675048,
+          "share_gap_negative_overlap": 1.8622129980605051e-06,
+          "share_gap_positive": 2.7933194970907578e-06,
+          "gap_seconds_quantiles": {
+            "min": -18000.0,
+            "p10": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 2419200.0
+          },
+          "duration_seconds_quantiles": {
+            "min": 60.0,
+            "p10": 300.0,
+            "p25": 600.0,
+            "p50": 1500.0,
+            "p75": 3000.0,
+            "p90": 5400.0,
+            "p99": 13200.0,
+            "max": 86400.0
+          },
+          "duration_all_multiples_of_60": true,
+          "exact_duplicate_rows": 0,
+          "duplicate_channel_start": 0
+        },
+        "31-42": {
+          "start_time_str_lengths": {
+            "19": 1295378
+          },
+          "start_time_unparsed": 0,
+          "share_next_start_eq_start_plus_duration_s": 0.9999907334046861,
+          "share_gap_negative_overlap": 6.177730209255167e-06,
+          "share_gap_positive": 3.0888651046275835e-06,
+          "gap_seconds_quantiles": {
+            "min": -3600.0,
+            "p10": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 4200.0
+          },
+          "duration_seconds_quantiles": {
+            "min": 60.0,
+            "p10": 300.0,
+            "p25": 600.0,
+            "p50": 1500.0,
+            "p75": 3000.0,
+            "p90": 5400.0,
+            "p99": 13500.0,
+            "max": 43200.0
+          },
+          "duration_all_multiples_of_60": true,
+          "exact_duplicate_rows": 0,
+          "duplicate_channel_start": 0
+        }
+      }
+    }
+  },
+  "time_ranges": {
+    "view_log": {
+      "start_min": {
+        "date": "2020-03-09 00:00:02",
+        "iso_year": 2020,
+        "iso_week": 11,
+        "weekday": 1
+      },
+      "start_max": {
+        "date": "2020-07-26 23:58:42",
+        "iso_year": 2020,
+        "iso_week": 30,
+        "weekday": 7
+      },
+      "stop_min": {
+        "date": "2020-03-09 00:01:26",
+        "iso_year": 2020,
+        "iso_week": 11,
+        "weekday": 1
+      },
+      "stop_max": {
+        "date": "2020-07-26 23:59:58",
+        "iso_year": 2020,
+        "iso_week": 30,
+        "weekday": 7
+      },
+      "rows_per_iso_year_week": {
+        "2020-W11": 407493,
+        "2020-W12": 452314,
+        "2020-W13": 465318,
+        "2020-W14": 428820,
+        "2020-W15": 412698,
+        "2020-W16": 406317,
+        "2020-W17": 417854,
+        "2020-W18": 385637,
+        "2020-W19": 336042,
+        "2020-W20": 232680,
+        "2020-W21": 182044,
+        "2020-W22": 192998,
+        "2020-W23": 162882,
+        "2020-W24": 156928,
+        "2020-W25": 138807,
+        "2020-W26": 126940,
+        "2020-W27": 105223,
+        "2020-W28": 271172,
+        "2020-W29": 261698,
+        "2020-W30": 278122
+      },
+      "share_rows_iso2020_weeks_11_30": 1.0
+    },
+    "11-20": {
+      "start_min": {
+        "date": "2020-03-08 23:00:00",
+        "iso_year": 2020,
+        "iso_week": 10,
+        "weekday": 7
+      },
+      "start_max": {
+        "date": "2020-05-18 11:45:00",
+        "iso_year": 2020,
+        "iso_week": 21,
+        "weekday": 1
+      },
+      "stop_max": {
+        "date": "2020-05-18 12:00:00",
+        "iso_year": 2020,
+        "iso_week": 21,
+        "weekday": 1
+      },
+      "rows_per_iso_year_week": {
+        "2020-W10": 86,
+        "2020-W11": 106036,
+        "2020-W12": 108177,
+        "2020-W13": 107363,
+        "2020-W14": 106527,
+        "2020-W15": 108126,
+        "2020-W16": 107697,
+        "2020-W17": 107721,
+        "2020-W18": 107505,
+        "2020-W19": 105473,
+        "2020-W20": 107093,
+        "2020-W21": 2431
+      }
+    },
+    "21-30": {
+      "start_min": {
+        "date": "2020-05-18 00:00:00",
+        "iso_year": 2020,
+        "iso_week": 21,
+        "weekday": 1
+      },
+      "start_max": {
+        "date": "2020-07-27 11:55:00",
+        "iso_year": 2020,
+        "iso_week": 31,
+        "weekday": 1
+      },
+      "stop_max": {
+        "date": "2020-07-27 12:00:00",
+        "iso_year": 2020,
+        "iso_week": 31,
+        "weekday": 1
+      },
+      "rows_per_iso_year_week": {
+        "2020-W21": 104798,
+        "2020-W22": 107274,
+        "2020-W23": 107657,
+        "2020-W24": 107449,
+        "2020-W25": 107104,
+        "2020-W26": 107544,
+        "2020-W27": 106878,
+        "2020-W28": 107528,
+        "2020-W29": 107640,
+        "2020-W30": 108093,
+        "2020-W31": 2429
+      }
+    },
+    "31-42": {
+      "start_min": {
+        "date": "2020-07-27 00:00:00",
+        "iso_year": 2020,
+        "iso_week": 31,
+        "weekday": 1
+      },
+      "start_max": {
+        "date": "2020-10-19 11:55:00",
+        "iso_year": 2020,
+        "iso_week": 43,
+        "weekday": 1
+      },
+      "stop_max": {
+        "date": "2020-10-19 12:00:00",
+        "iso_year": 2020,
+        "iso_week": 43,
+        "weekday": 1
+      },
+      "rows_per_iso_year_week": {
+        "2020-W31": 105719,
+        "2020-W32": 108256,
+        "2020-W33": 107039,
+        "2020-W34": 106862,
+        "2020-W35": 107028,
+        "2020-W36": 107492,
+        "2020-W37": 107558,
+        "2020-W38": 108258,
+        "2020-W39": 108512,
+        "2020-W40": 108763,
+        "2020-W41": 108843,
+        "2020-W42": 108649,
+        "2020-W43": 2399
+      }
+    }
+  },
+  "channel_key": {
+    "11-20": {
+      "view_rows": 3945173,
+      "distinct_vsetv_id": 199,
+      "distinct_channel_id": 400,
+      "share_rows_vsetv_in_channel_id": 0.9711409360248587,
+      "share_distinct_vsetv_in_channel_id": 0.9597989949748744
+    },
+    "21-30": {
+      "view_rows": 1876814,
+      "distinct_vsetv_id": 198,
+      "distinct_channel_id": 403,
+      "share_rows_vsetv_in_channel_id": 0.9783947690074776,
+      "share_distinct_vsetv_in_channel_id": 0.9696969696969697
+    },
+    "31-42": {
+      "distinct_channel_id": 404,
+      "share_distinct_vsetv_in_test_channel_id": 0.9702970297029703
+    },
+    "vsetv_id_range": [
+      3,
+      1531
+    ],
+    "channel_id_range": [
+      3,
+      1541
+    ],
+    "top_vsetv_ids_not_in_any_training_schedule": {
+      "1174": 86883,
+      "1510": 9357,
+      "1509": 8546,
+      "1508": 7491,
+      "149": 1302
+    },
+    "channel_id_to_titles": {
+      "3": [
+        "1+1"
+      ],
+      "4": [
+        "Интер"
+      ],
+      "5": [
+        "ICTV"
+      ],
+      "6": [
+        "СТБ"
+      ],
+      "7": [
+        "Новый канал"
+      ],
+      "8": [
+        "Первый канал (Россия)"
+      ],
+      "9": [
+        "Россия 1"
+      ],
+      "10": [
+        "НТВ"
+      ],
+      "11": [
+        "ТВ Центр"
+      ],
+      "13": [
+        "РЕН ТВ"
+      ],
+      "14": [
+        "ТНТ"
+      ],
+      "15": [
+        "Культура"
+      ],
+      "17": [
+        "СТС"
+      ],
+      "18": [
+        "ТЕТ"
+      ],
+      "19": [
+        "К1"
+      ],
+      "20": [
+        "К2"
+      ],
+      "21": [
+        "Первый канал (Россия) Европа"
+      ],
+      "22": [
+        "RTVI Европа"
+      ],
+      "23": [
+        "2+2"
+      ],
+      "24": [
+        "ПлюсПлюс"
+      ],
+      "25": [
+        "Прямой"
+      ],
+      "27": [
+        "Пиксель"
+      ],
+      "29": [
+        "Наше кино"
+      ],
+      "30": [
+        "Киносвидание"
+      ],
+      "31": [
+        "Детский мир"
+      ],
+      "32": [
+        "Матч! Планета"
+      ],
+      "33": [
+        "Матч! Футбол 1"
+      ],
+      "34": [
+        "Кинопремьера HD"
+      ],
+      "36": [
+        "Eurosport 1"
+      ],
+      "37": [
+        "Euronews (русский)"
+      ],
+      "38": [
+        "Discovery Россия"
+      ],
+      "39": [
+        "Animal planet Europe"
+      ],
+      "41": [
+        "Discovery Science"
+      ],
+      "45": [
+        "Nickelodeon Россия"
+      ],
+      "46": [
+        "BBC World News"
+      ],
+      "47": [
+        "CNN"
+      ],
+      "48": [
+        "Пятница"
+      ],
+      "49": [
+        "Ю"
+      ],
+      "50": [
+        "VH1 Europe"
+      ],
+      "54": [
+        "Cartoon network"
+      ],
+      "56": [
+        "Че"
+      ],
+      "64": [
+        "OTV"
+      ],
+      "68": [
+        "ТВ XXI"
+      ],
+      "69": [
+        "Интер+"
+      ],
+      "75": [
+        "Киев",
+        "Київ"
+      ],
+      "82": [
+        "НТВ-Мир"
+      ],
+      "85": [
+        "Mezzo"
+      ],
+      "88": [
+        "Travel channel Европа"
+      ],
+      "89": [
+        "Канал Disney"
+      ],
+      "90": [
+        "Bloomberg"
+      ],
+      "91": [
+        "CBS Reality"
+      ],
+      "92": [
+        "Enter-фильм"
+      ],
+      "94": [
+        "М1"
+      ],
+      "99": [
+        "Extreme sports"
+      ],
+      "106": [
+        "5 канал"
+      ],
+      "108": [
+        "Украина"
+      ],
+      "116": [
+        "MCM Top Россия"
+      ],
+      "123": [
+        "Москва-24"
+      ],
+      "124": [
+        "Домашний"
+      ],
+      "142": [
+        "ТДК"
+      ],
+      "146": [
+        "РБК ТВ"
+      ],
+      "175": [
+        "Viasat History CEE"
+      ],
+      "176": [
+        "Мир"
+      ],
+      "177": [
+        "Русский иллюзион"
+      ],
+      "212": [
+        "НТН"
+      ],
+      "213": [
+        "Кинохит"
+      ],
+      "214": [
+        "AMC Украина и Прибалтика"
+      ],
+      "216": [
+        "Ностальгия"
+      ],
+      "218": [
+        "MTV European"
+      ],
+      "221": [
+        "MTV Hits International"
+      ],
+      "222": [
+        "MTV 90s",
+        "MTV Rocks International"
+      ],
+      "224": [
+        "MTV Dance International",
+        "club MTV International"
+      ],
+      "227": [
+        "MTV 80s",
+        "VH1 Classic Europe"
+      ],
+      "229": [
+        "Eurosport 2"
+      ],
+      "231": [
+        "Беларусь 24"
+      ],
+      "234": [
+        "Мега"
+      ],
+      "235": [
+        "Союз (Екатеринбург)"
+      ],
+      "237": [
+        "ТВ Центр Международный (TVCI)"
+      ],
+      "238": [
+        "Спас"
+      ],
+      "241": [
+        "Драйв"
+      ],
+      "242": [
+        "Здоровое ТВ"
+      ],
+      "243": [
+        "Охота и рыбалка"
+      ],
+      "244": [
+        "Ретро"
+      ],
+      "246": [
+        "Уникум"
+      ],
+      "255": [
+        "TV1000 Русское кино"
+      ],
+      "260": [
+        "Наше новое кино"
+      ],
+      "263": [
+        "Доктор"
+      ],
+      "270": [
+        "Sport 1"
+      ],
+      "272": [
+        "БСТ"
+      ],
+      "278": [
+        "Киносерия"
+      ],
+      "282": [
+        "1+1 Международный"
+      ],
+      "284": [
+        "Матч Премьер"
+      ],
+      "285": [
+        "UA:Культура"
+      ],
+      "286": [
+        "Мультиландия"
+      ],
+      "288": [
+        "Russian Extreme (HD REX)",
+        "Русский экстрим"
+      ],
+      "292": [
+        "Кинокомедия"
+      ],
+      "293": [
+        "Индийское кино"
+      ],
+      "294": [
+        "Глас"
+      ],
+      "295": [
+        "National Geographic Россия"
+      ],
+      "298": [
+        "24 (Телеканал новостей 24)"
+      ],
+      "299": [
+        "Первый деловой"
+      ],
+      "301": [
+        "Russia Today"
+      ],
+      "302": [
+        "Дом кино"
+      ],
+      "303": [
+        "Время"
+      ],
+      "305": [
+        "Усадьба"
+      ],
+      "308": [
+        "Пятый канал"
+      ],
+      "309": [
+        "Sport 2"
+      ],
+      "310": [
+        "Матч! Боец"
+      ],
+      "311": [
+        "Авто Плюс"
+      ],
+      "312": [
+        "Родное кино"
+      ],
+      "313": [
+        "World Fashion Channel Россия"
+      ],
+      "315": [
+        "UA:Закарпаття"
+      ],
+      "316": [
+        "ТНТ-Music"
+      ],
+      "317": [
+        "UA:Київ"
+      ],
+      "327": [
+        "Иллюзион+"
+      ],
+      "328": [
+        "Россия 24"
+      ],
+      "329": [
+        "НСТ"
+      ],
+      "331": [
+        "ZooПарк"
+      ],
+      "332": [
+        "Viasat Sport Россия"
+      ],
+      "334": [
+        "RU.TV"
+      ],
+      "341": [
+        "2х2"
+      ],
+      "342": [
+        "Fashion TV Europe"
+      ],
+      "350": [
+        "Совершенно секретно"
+      ],
+      "353": [
+        "Zoom"
+      ],
+      "355": [
+        "РТР-Планета Украина"
+      ],
+      "356": [
+        "НАШ"
+      ],
+      "381": [
+        "Техно 24"
+      ],
+      "383": [
+        "Кухня ТВ"
+      ],
+      "384": [
+        "Жара"
+      ],
+      "388": [
+        "EU.Music"
+      ],
+      "390": [
+        "Феникс+Кино"
+      ],
+      "392": [
+        "CNL Украина"
+      ],
+      "394": [
+        "Мама"
+      ],
+      "397": [
+        "Discovery Восточная Европа"
+      ],
+      "402": [
+        "8 канал (Украина)"
+      ],
+      "403": [
+        "Sony Sci-Fi Россия"
+      ],
+      "406": [
+        "Fine Living Европа"
+      ],
+      "413": [
+        "FOX Россия"
+      ],
+      "414": [
+        "Ocean TV"
+      ],
+      "415": [
+        "Телекафе"
+      ],
+      "416": [
+        "NewsOne"
+      ],
+      "417": [
+        "MusicBox UA"
+      ],
+      "432": [
+        "Fox Life Россия"
+      ],
+      "433": [
+        "Сарафан"
+      ],
+      "435": [
+        "Первый автомобильный"
+      ],
+      "439": [
+        "Музыка Первого"
+      ],
+      "442": [
+        "ZeeTV Россия"
+      ],
+      "443": [
+        "Sport 1 Baltic"
+      ],
+      "445": [
+        "М2"
+      ],
+      "446": [
+        "ЧП.INFO"
+      ],
+      "454": [
+        "JimJam"
+      ],
+      "457": [
+        "Глас (Одесса)"
+      ],
+      "459": [
+        "HDL"
+      ],
+      "460": [
+        "Оце"
+      ],
+      "476": [
+        "ТНТ4"
+      ],
+      "481": [
+        "Бигуди"
+      ],
+      "484": [
+        "Animal planet Россия"
+      ],
+      "485": [
+        "English Club TV"
+      ],
+      "486": [
+        "France 24 English"
+      ],
+      "487": [
+        "Еврокино"
+      ],
+      "488": [
+        "MTV Live HD"
+      ],
+      "491": [
+        "БелРос"
+      ],
+      "507": [
+        "Футбол 1"
+      ],
+      "510": [
+        "FTV HD"
+      ],
+      "525": [
+        "Sony Channel Россия"
+      ],
+      "528": [
+        "BabyTV"
+      ],
+      "534": [
+        "myZen.tv"
+      ],
+      "535": [
+        "Eurosport 1 HD"
+      ],
+      "590": [
+        "Киносемья"
+      ],
+      "591": [
+        "Матч! Игра HD"
+      ],
+      "594": [
+        "National Geographic Россия HD"
+      ],
+      "596": [
+        "Gulli Girl"
+      ],
+      "597": [
+        "TiJi Россия"
+      ],
+      "599": [
+        "Discovery Showcase HD"
+      ],
+      "601": [
+        "Домашние животные"
+      ],
+      "602": [
+        "Психология21"
+      ],
+      "603": [
+        "Вопросы и ответы"
+      ],
+      "604": [
+        "КХЛ ТВ"
+      ],
+      "605": [
+        "RTG TV"
+      ],
+      "606": [
+        "Малятко TV"
+      ],
+      "608": [
+        "Киномикс"
+      ],
+      "617": [
+        "Донбасс"
+      ],
+      "627": [
+        "Мультимузыка"
+      ],
+      "633": [
+        "UA:Буковина"
+      ],
+      "637": [
+        "Мир сериала"
+      ],
+      "639": [
+        "Моя планета"
+      ],
+      "643": [
+        "Nickelodeon СНГ"
+      ],
+      "644": [
+        "Da Vinci Learning Europe"
+      ],
+      "648": [
+        "Мужской"
+      ],
+      "649": [
+        "Успех"
+      ],
+      "651": [
+        "Da Vinci Learning Россия"
+      ],
+      "652": [
+        "Viasat Nature CEE"
+      ],
+      "653": [
+        "360°"
+      ],
+      "656": [
+        "ducktv"
+      ],
+      "667": [
+        "Матч! Арена"
+      ],
+      "669": [
+        "НТА"
+      ],
+      "672": [
+        "Mezzo Live HD"
+      ],
+      "680": [
+        "Fashion One HD"
+      ],
+      "681": [
+        "8 канал (Россия)"
+      ],
+      "682": [
+        "Europa Plus TV"
+      ],
+      "684": [
+        "ZIK"
+      ],
+      "685": [
+        "Эко-ТВ"
+      ],
+      "687": [
+        "Карусель"
+      ],
+      "688": [
+        "Карусель International"
+      ],
+      "689": [
+        "UATV"
+      ],
+      "690": [
+        "Travel channel Европа HD"
+      ],
+      "691": [
+        "TLC Россия"
+      ],
+      "693": [
+        "Радость моя"
+      ],
+      "694": [
+        "ТБН Россия"
+      ],
+      "703": [
+        "Футбол 2"
+      ],
+      "707": [
+        "Матч! Футбол 2"
+      ],
+      "709": [
+        "Сигма"
+      ],
+      "710": [
+        "МТВ"
+      ],
+      "711": [
+        "Матч! Игра"
+      ],
+      "712": [
+        "Наука 2.0"
+      ],
+      "714": [
+        "ТВ-7 (Мариуполь)"
+      ],
+      "715": [
+        "Animal Planet HD"
+      ],
+      "716": [
+        "Viasat Nature/History HD"
+      ],
+      "719": [
+        "Шансон ТВ (Ямал)"
+      ],
+      "724": [
+        "Матч! Арена HD"
+      ],
+      "728": [
+        "Nick Jr"
+      ],
+      "732": [
+        "Outdoor channel"
+      ],
+      "739": [
+        "Nickelodeon HD"
+      ],
+      "740": [
+        "УНИАН ТВ"
+      ],
+      "747": [
+        "Матч! Футбол 1 HD"
+      ],
+      "748": [
+        "Xsport"
+      ],
+      "751": [
+        "Черноморская ТРК"
+      ],
+      "752": [
+        "Shopping Live"
+      ],
+      "753": [
+        "Матч! Футбол 2 HD"
+      ],
+      "757": [
+        "Русский роман"
+      ],
+      "763": [
+        "ATR"
+      ],
+      "766": [
+        "Nat Geo Wild Россия"
+      ],
+      "770": [
+        "Paramount Comedy Россия"
+      ],
+      "774": [
+        "Просвещение"
+      ],
+      "777": [
+        "TLC Pan Regional"
+      ],
+      "778": [
+        "Viasat Explore CEE"
+      ],
+      "781": [
+        "ТНВ-Планета"
+      ],
+      "783": [
+        "Sony Channel Россия HD"
+      ],
+      "798": [
+        "Trace Sport Stars HD"
+      ],
+      "800": [
+        "Eurosport 2 North-East"
+      ],
+      "803": [
+        "Прямой HD"
+      ],
+      "804": [
+        "Футбол 2 HD"
+      ],
+      "805": [
+        "Sony Turbo"
+      ],
+      "808": [
+        "Муз-ТВ"
+      ],
+      "812": [
+        "Русский бестселлер"
+      ],
+      "823": [
+        "Рада"
+      ],
+      "825": [
+        "Eurosport 2 North-East HD"
+      ],
+      "827": [
+        "UA:Крим"
+      ],
+      "829": [
+        "Театр"
+      ],
+      "832": [
+        "Travel+Adventure"
+      ],
+      "838": [
+        "Мир 24"
+      ],
+      "839": [
+        "Первый канал HD"
+      ],
+      "841": [
+        "Россия 1 HD"
+      ],
+      "842": [
+        "Охотник и рыболов HD"
+      ],
+      "843": [
+        "НЛО TV"
+      ],
+      "844": [
+        "EWTN Украина"
+      ],
+      "845": [
+        "ТВ-3 Россия (+3)"
+      ],
+      "858": [
+        "РГВК Дагестан"
+      ],
+      "867": [
+        "Дон 24"
+      ],
+      "871": [
+        "Надия"
+      ],
+      "874": [
+        "Сонце"
+      ],
+      "880": [
+        "ОТР"
+      ],
+      "889": [
+        "Матч Премьер HD"
+      ],
+      "900": [
+        "RTG HD"
+      ],
+      "901": [
+        "TLC Россия HD"
+      ],
+      "902": [
+        "History Россия"
+      ],
+      "905": [
+        "History Россия HD"
+      ],
+      "907": [
+        "Viasat Sport Россия HD"
+      ],
+      "910": [
+        "Матч! Футбол 3"
+      ],
+      "911": [
+        "Lale"
+      ],
+      "914": [
+        "HDFASHION & Lifestyle"
+      ],
+      "917": [
+        "Матч! Футбол 3 HD"
+      ],
+      "920": [
+        "Перший Західний"
+      ],
+      "921": [
+        "112 Украина"
+      ],
+      "924": [
+        "Авто24"
+      ],
+      "934": [
+        "Морской"
+      ],
+      "935": [
+        "Paramount channel Россия"
+      ],
+      "936": [
+        "Еспресо TV"
+      ],
+      "938": [
+        "Discovery Россия HD"
+      ],
+      "945": [
+        "Трофей"
+      ],
+      "946": [
+        "Luxury"
+      ],
+      "952": [
+        "СТС Love"
+      ],
+      "961": [
+        "RT Д (Русский)"
+      ],
+      "962": [
+        "Мульт"
+      ],
+      "963": [
+        "Футбол 1 HD"
+      ],
+      "993": [
+        "DocuBox HD"
+      ],
+      "994": [
+        "Fast&FunBox HD"
+      ],
+      "995": [
+        "FightBox HD"
+      ],
+      "996": [
+        "FashionBox HD"
+      ],
+      "997": [
+        "FilmBox ArtHouse"
+      ],
+      "998": [
+        "FilmBox Russia"
+      ],
+      "999": [
+        "360TuneBox"
+      ],
+      "1000": [
+        "ID Investigation Discovery (Европа)"
+      ],
+      "1002": [
+        "Индиго"
+      ],
+      "1005": [
+        "Food Network Россия"
+      ],
+      "1014": [
+        "1HD"
+      ],
+      "1020": [
+        "TV1000 World Kino"
+      ],
+      "1022": [
+        "Ктокуда"
+      ],
+      "1026": [
+        "Живая планета"
+      ],
+      "1030": [
+        "Bollywood HD"
+      ],
+      "1036": [
+        "4 канал"
+      ],
+      "1037": [
+        "4 канал"
+      ],
+      "1040": [
+        "WBC"
+      ],
+      "1045": [
+        "Дом кино Премиум"
+      ],
+      "1049": [
+        "Громадське"
+      ],
+      "1056": [
+        "Винтаж"
+      ],
+      "1058": [
+        "Бобер"
+      ],
+      "1060": [
+        "Мужское кино"
+      ],
+      "1061": [
+        "DTX"
+      ],
+      "1062": [
+        "Бокс ТВ"
+      ],
+      "1063": [
+        "DW Deutsch"
+      ],
+      "1067": [
+        "Odessa Int"
+      ],
+      "1072": [
+        "Надежда"
+      ],
+      "1075": [
+        "Trace Urban HD"
+      ],
+      "1077": [
+        "Матч ТВ"
+      ],
+      "1078": [
+        "Boutique TV"
+      ],
+      "1079": [
+        "#НАШ канал"
+      ],
+      "1080": [
+        "Дача"
+      ],
+      "1086": [
+        "ID Fashion"
+      ],
+      "1087": [
+        "ПравдаТУТ"
+      ],
+      "1091": [
+        "11 канал (Днепр)"
+      ],
+      "1095": [
+        "Food Network Россия HD"
+      ],
+      "1102": [
+        "Живая природа HD"
+      ],
+      "1109": [
+        "MostVideo"
+      ],
+      "1117": [
+        "Кино ТВ HD"
+      ],
+      "1121": [
+        "ALEX.UA"
+      ],
+      "1128": [
+        "Milady Television"
+      ],
+      "1138": [
+        "КВН ТВ"
+      ],
+      "1139": [
+        "Epoque"
+      ],
+      "1148": [
+        "Южная волна"
+      ],
+      "1149": [
+        "Терра"
+      ],
+      "1150": [
+        "Eurosport 2 Россия"
+      ],
+      "1151": [
+        "Eurosport 1 Россия"
+      ],
+      "1157": [
+        "Белсат"
+      ],
+      "1162": [
+        "TV5 (Запорожье)"
+      ],
+      "1165": [
+        "Телевсесвит"
+      ],
+      "1168": [
+        "ТВА"
+      ],
+      "1172": [
+        "Херсон Плюс"
+      ],
+      "1175": [
+        "Квартал ТВ"
+      ],
+      "1177": [
+        "Наука"
+      ],
+      "1178": [
+        "Фауна"
+      ],
+      "1182": [
+        "Nat Geo Wild Россия HD"
+      ],
+      "1185": [
+        "Настоящее время"
+      ],
+      "1186": [
+        "Kyiv.Live",
+        "Rabinovich TV"
+      ],
+      "1188": [
+        "#НАШЕ"
+      ],
+      "1189": [
+        "#НАШЕ music HD"
+      ],
+      "1190": [
+        "РАІ"
+      ],
+      "1196": [
+        "Plus"
+      ],
+      "1208": [
+        "CBN Еммануил"
+      ],
+      "1209": [
+        "В гостях у сказки"
+      ],
+      "1214": [
+        "НТВ Сериал"
+      ],
+      "1215": [
+        "НТВ Право"
+      ],
+      "1216": [
+        "НТВ Стиль"
+      ],
+      "1219": [
+        "Bolt"
+      ],
+      "1223": [
+        "О!"
+      ],
+      "1227": [
+        "Продвижение"
+      ],
+      "1230": [
+        "Star Cinema"
+      ],
+      "1234": [
+        "ОТБ 'Галичина'"
+      ],
+      "1235": [
+        "ТРК 'Черновцы'"
+      ],
+      "1238": [
+        "Z (Запорожье)"
+      ],
+      "1249": [
+        "UA:Перший",
+        "UA:Перший (спутник)"
+      ],
+      "1251": [
+        "Spike"
+      ],
+      "1255": [
+        "Караван ТВ"
+      ],
+      "1266": [
+        "Bolt HD"
+      ],
+      "1272": [
+        "UA:Донбас"
+      ],
+      "1276": [
+        "Star Family"
+      ],
+      "1278": [
+        "Етно канал"
+      ],
+      "1294": [
+        "Paramount Comedy Украина"
+      ],
+      "1299": [
+        "Sport 2 Baltic"
+      ],
+      "1306": [
+        "Натали"
+      ],
+      "1310": [
+        "Дорама"
+      ],
+      "1314": [
+        "Film.Ua Drama HD"
+      ],
+      "1319": [
+        "OBOZ TV",
+        "OBOZREVATEL"
+      ],
+      "1327": [
+        "Epic Drama"
+      ],
+      "1377": [
+        "Megogo Live"
+      ],
+      "1379": [
+        "Travel Guide-TV",
+        "Travel Guide-TV HD"
+      ],
+      "1386": [
+        "36,6 TV"
+      ],
+      "1390": [
+        "Hollywood"
+      ],
+      "1391": [
+        "Hollywood HD"
+      ],
+      "1395": [
+        "Тернопіль 1"
+      ],
+      "1397": [
+        "UKRAINE 1"
+      ],
+      "1399": [
+        "UKRAINE 2"
+      ],
+      "1401": [
+        "NLO TV 1"
+      ],
+      "1403": [
+        "NLO TV 2"
+      ],
+      "1405": [
+        "4ever music"
+      ],
+      "1411": [
+        "Fox Life Украина, Литва, СНГ"
+      ],
+      "1412": [
+        "Fox Life Украина, Литва, СНГ HD"
+      ],
+      "1413": [
+        "FOX Украина, Литва, СНГ"
+      ],
+      "1414": [
+        "FOX Украина, Литва, СНГ HD"
+      ],
+      "1451": [
+        "Setanta Sports Ukraine"
+      ],
+      "1477": [
+        "Украина 24"
+      ],
+      "1480": [
+        "Bambarbia TV"
+      ],
+      "1487": [
+        "Футбол 3"
+      ],
+      "1489": [
+        "Кус-Кус"
+      ],
+      "1495": [
+        "NickToons"
+      ],
+      "1496": [
+        "Рыбалка"
+      ],
+      "1499": [
+        "Setanta Sports Ukraine +"
+      ],
+      "1516": [
+        "TV1000 CEE"
+      ],
+      "1517": [
+        "SHAKHTAR TV"
+      ],
+      "1519": [
+        "ViP Comedy CEE"
+      ],
+      "1520": [
+        "ViP Megahit CEE"
+      ],
+      "1521": [
+        "TV1000 Action CEE"
+      ],
+      "1528": [
+        "ViP Premiere CEE HD"
+      ],
+      "1531": [
+        "Апостроф TV"
+      ],
+      "1541": [
+        "Trash"
+      ]
+    },
+    "channel_ids_with_multiple_titles": {
+      "75": [
+        "Киев",
+        "Київ"
+      ],
+      "222": [
+        "MTV 90s",
+        "MTV Rocks International"
+      ],
+      "224": [
+        "MTV Dance International",
+        "club MTV International"
+      ],
+      "227": [
+        "MTV 80s",
+        "VH1 Classic Europe"
+      ],
+      "288": [
+        "Russian Extreme (HD REX)",
+        "Русский экстрим"
+      ],
+      "1186": [
+        "Kyiv.Live",
+        "Rabinovich TV"
+      ],
+      "1249": [
+        "UA:Перший",
+        "UA:Перший (спутник)"
+      ],
+      "1319": [
+        "OBOZ TV",
+        "OBOZREVATEL"
+      ],
+      "1379": [
+        "Travel Guide-TV",
+        "Travel Guide-TV HD"
+      ]
+    }
+  },
+  "labelling": {
+    "11-20": {
+      "rows": 1074235,
+      "share_rows_labelled": 0.10762356467625799,
+      "share_airtime_labelled": 0.1596634144965732,
+      "distinct_labelled_tv_show_id": 5847,
+      "tv_show_id_null": 0,
+      "category_counts_all_rows": {
+        "Другое": 484058,
+        "Познавательное": 221981,
+        "Детям": 104593,
+        "Сериалы": 72031,
+        "Спорт": 62197,
+        "Инфо": 50585,
+        "Фильмы": 41579,
+        "Музыка": 29200,
+        "Развлечения": 8011
+      },
+      "category_counts_labelled_rows": {
+        "Детям": 47862,
+        "Сериалы": 31153,
+        "Фильмы": 21895,
+        "Развлечения": 6887,
+        "Инфо": 4487,
+        "Познавательное": 2792,
+        "Другое": 527,
+        "Спорт": 10
+      },
+      "distinct_category_per_labelled_show_max": 1
+    },
+    "21-30": {
+      "rows": 1074394,
+      "share_rows_labelled": 0.11309165911202036,
+      "share_airtime_labelled": 0.16899980564172434,
+      "distinct_labelled_tv_show_id": 6363,
+      "tv_show_id_null": 0,
+      "category_counts_all_rows": {
+        "Другое": 480431,
+        "Познавательное": 225108,
+        "Детям": 104913,
+        "Сериалы": 72081,
+        "Спорт": 60163,
+        "Инфо": 51039,
+        "Фильмы": 44024,
+        "Музыка": 28843,
+        "Развлечения": 7792
+      },
+      "category_counts_labelled_rows": {
+        "Детям": 46585,
+        "Сериалы": 33288,
+        "Фильмы": 25829,
+        "Развлечения": 6603,
+        "Инфо": 4485,
+        "Познавательное": 4212,
+        "Другое": 497,
+        "Спорт": 6
+      },
+      "distinct_category_per_labelled_show_max": 1
+    },
+    "31-42": {
+      "rows": 1295378,
+      "share_rows_labelled": 0.11176197218109309,
+      "share_airtime_labelled": 0.16672061292721319,
+      "distinct_labelled_tv_show_id": 6636,
+      "tv_show_id_null": 0,
+      "category_counts_all_rows": {
+        "Другое": 572099,
+        "Познавательное": 273595,
+        "Детям": 130440,
+        "Сериалы": 86663,
+        "Спорт": 72002,
+        "Инфо": 62860,
+        "Фильмы": 53708,
+        "Музыка": 34441,
+        "Развлечения": 9570
+      },
+      "category_counts_labelled_rows": {
+        "Детям": 55130,
+        "Сериалы": 40590,
+        "Фильмы": 30420,
+        "Развлечения": 8214,
+        "Инфо": 5503,
+        "Познавательное": 4367,
+        "Другое": 548,
+        "Спорт": 2
+      },
+      "distinct_category_per_labelled_show_max": 1
+    },
+    "test_vs_train": {
+      "test_distinct_labelled": 6636,
+      "train_distinct_labelled_union": 8234,
+      "test_labelled_also_in_train": 5199,
+      "share_test_distinct_in_train": 0.7834538878842676,
+      "share_test_labelled_rows_in_train": 0.9564355478193598,
+      "share_test_labelled_airtime_in_train": 0.9271753055599612
+    }
+  },
+  "view_log": {
+    "rows": 5821987,
+    "distinct_users": 4914,
+    "distinct_users_weeks_11_20": 4876,
+    "distinct_users_weeks_21_30": 4820,
+    "duraton_quantiles": {
+      "min": 61.0,
+      "p10": 80.0,
+      "p25": 133.0,
+      "p50": 396.0,
+      "p75": 1452.0,
+      "p90": 3911.0,
+      "p99": 14079.139999999665,
+      "max": 342145.0
+    },
+    "duraton_mean": 1480.4593730628392,
+    "share_duraton_eq_stop_minus_start": 0.9999799037682495,
+    "duraton_minus_calc_value_counts_top": {
+      "0": 5821870,
+      "-3600": 117
+    },
+    "share_duraton_le_0": 0.0,
+    "exact_duplicate_rows": 17,
+    "views_per_user_quantiles": {
+      "min": 1.0,
+      "p10": 223.3,
+      "p25": 476.0,
+      "p50": 874.0,
+      "p75": 1547.0,
+      "p90": 2429.7,
+      "p99": 5348.309999999999,
+      "max": 38114.0
+    },
+    "stop_crosses_midnight_share": 0.020586785920339568,
+    "mismatch_rows": 117,
+    "mismatch_rows_spanning_2020_03_29_03_00": 117
+  },
+  "submission": {
+    "first_lines": [
+      "user_id,tv_show_id",
+      "8377619604347126107,0 0 0 0 0",
+      "8381667675275833309,0 0 0 0 0"
+    ],
+    "rows": 1260,
+    "distinct_users": 1260,
+    "header": [
+      "user_id",
+      "tv_show_id"
+    ],
+    "tokens_per_row_counts": {
+      "5": 1260
+    },
+    "distinct_prediction_strings": [
+      "0 0 0 0 0"
+    ],
+    "users_in_view_log": 1260,
+    "users_with_view_weeks_21_30": 1246,
+    "users_with_view_weeks_11_20": 1256,
+    "users_with_view_in_both": 1242
+  },
+  "join_sample": {
+    "sample_rows": 116440,
+    "share_views_overlap_any_schedule_row": 0.9291738234283752,
+    "share_views_overlap_labelled": 0.5074029543112333,
+    "share_views_with_duraton_le_0_in_sample": 0.0,
+    "share_views_overlap_labelled_among_positive_duration": 0.5074029543112333,
+    "share_views_whose_channel_absent_from_period_schedule": 0.02645997938852628,
+    "schedule_rows_matched_per_view_quantiles": {
+      "min": 1.0,
+      "p10": 1.0,
+      "p25": 1.0,
+      "p50": 1.0,
+      "p75": 1.0,
+      "p90": 2.0,
+      "p99": 6.0,
+      "max": 94.0
+    },
+    "labelled_pairs": 76654,
+    "labelled_overlap_seconds_quantiles": {
+      "min": 1.0,
+      "p10": 79.0,
+      "p25": 155.0,
+      "p50": 523.0,
+      "p75": 1500.0,
+      "p90": 3300.0,
+      "p99": 7200.0,
+      "max": 27600.0
+    },
+    "labelled_overlap_over_programme_duration_quantiles": {
+      "min": 6.944444444444444e-05,
+      "p10": 0.012777777777777779,
+      "p25": 0.0296233164983165,
+      "p50": 0.11583333333333333,
+      "p75": 0.4521180555555555,
+      "p90": 1.0,
+      "p99": 1.0,
+      "max": 1.0
+    },
+    "labelled_overlap_frac_share_ge": {
+      "0.05": 0.655569180995121,
+      "0.1": 0.5273436480809873,
+      "0.25": 0.35755472643306285,
+      "0.5": 0.23200354841234638,
+      "0.8": 0.14865499517311556
+    },
+    "labelled_overlap_seconds_share_ge": {
+      "60": 0.9731129490959376,
+      "300": 0.6174107026378272,
+      "600": 0.47247371304824276,
+      "1800": 0.21162626868787016
+    },
+    "view_start_within_60s_of_programme_start_by_shift_h": {
+      "-3": 0.03526279628993473,
+      "-2": 0.03631913431810375,
+      "-1": 0.03424939883201649,
+      "0": 0.035357265544486434,
+      "1": 0.03257471659223635,
+      "2": 0.03275506698728959,
+      "3": 0.03209378220542769
+    }
+  },
+  "runtime_seconds": 72.4
+}

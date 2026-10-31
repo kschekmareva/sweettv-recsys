@@ -1,0 +1,278 @@
+{
+  "threshold_sec": 300,
+  "k": 5,
+  "metric_tests": [
+    {
+      "case": "perfect list",
+      "pred": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "truth": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "ap5": 1.0,
+      "expected": 1.0,
+      "ok": true
+    },
+    {
+      "case": "hits at k=2 and k=4, |truth|=2",
+      "pred": [
+        9,
+        1,
+        8,
+        2,
+        7
+      ],
+      "truth": [
+        1,
+        2
+      ],
+      "ap5": 0.5,
+      "expected": 0.5,
+      "ok": true
+    },
+    {
+      "case": "single hit at k=5, |truth|=6 -> denominator 5",
+      "pred": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "truth": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "ap5": 0.04,
+      "expected": 0.04,
+      "ok": true
+    },
+    {
+      "case": "empty truth",
+      "pred": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "truth": [],
+      "ap5": 0.0,
+      "expected": 0.0,
+      "ok": true
+    }
+  ],
+  "join": {
+    "11-20": {
+      "views": 3945173,
+      "view_seconds": 4929817616,
+      "views_channel_absent_from_schedule": 113854,
+      "view_seconds_channel_absent": 123503248,
+      "distinct_vsetv_id_absent": 8,
+      "views_channel_present_no_overlap": 255954,
+      "views_with_any_overlap": 3575365,
+      "pairs_all": 4921894,
+      "matched_seconds_all": 4478653208,
+      "matched_seconds_unlabelled_id0": 2023786859,
+      "matched_seconds_labelled": 2454866349,
+      "share_matched_seconds_unlabelled": 0.4518739819785573,
+      "views_with_labelled_overlap": 1897799,
+      "distinct_users_in_views": 4876,
+      "interaction_pairs_labelled": 857222
+    },
+    "21-30": {
+      "views": 1876814,
+      "view_seconds": 3689818808,
+      "views_channel_absent_from_schedule": 40549,
+      "view_seconds_channel_absent": 51994348,
+      "distinct_vsetv_id_absent": 6,
+      "views_channel_present_no_overlap": 4503,
+      "views_with_any_overlap": 1831762,
+      "pairs_all": 2828405,
+      "matched_seconds_all": 3626800856,
+      "matched_seconds_unlabelled_id0": 1507741879,
+      "matched_seconds_labelled": 2119058977,
+      "share_matched_seconds_unlabelled": 0.41572226842994875,
+      "views_with_labelled_overlap": 1065602,
+      "distinct_users_in_views": 4820,
+      "interaction_pairs_labelled": 658368
+    },
+    "build_seconds": 50.4
+  },
+  "diagnostics": {
+    "pool_size": 6361,
+    "train_positive_pairs": 582559,
+    "train_positive_users": 4834,
+    "val_positive_pairs": 478219,
+    "val_positive_users": 4799,
+    "val_positive_pairs_in_pool": 478219,
+    "share_val_positives_in_pool": 1.0,
+    "repeat_rate_val_positive_also_train_positive": 0.211298589140122,
+    "repeat_pairs": 101047,
+    "repeat_rate_among_users_with_train_positive": 0.21231483621540984,
+    "val_pos_per_user_quantiles": {
+      "0.1": 19.0,
+      "0.25": 42.0,
+      "0.5": 81.0,
+      "0.75": 139.0,
+      "0.9": 205.0
+    },
+    "train_pos_per_user_quantiles": {
+      "0.1": 30.0,
+      "0.25": 61.0,
+      "0.5": 107.0,
+      "0.75": 162.0,
+      "0.9": 224.0
+    },
+    "eval_a_users": 4799,
+    "eval_a_cold_no_train_positive": 56,
+    "eval_a_cold_no_train_positive_in_pool": 59,
+    "submission_users": 1260,
+    "submission_users_nonempty_truth": 1246,
+    "submission_cold_no_train_positive": 10,
+    "submission_cold_no_train_positive_in_pool": 10,
+    "submission_cold_with_nonempty_truth": 8
+  },
+  "results": {
+    "P": {
+      "MAP5_a_users_with_truth": 0.6358140584844064,
+      "MAP5_b_submission_users": 0.743089947089947,
+      "MAP5_a_subset_with_in_pool_train_history": 0.6394173699015472,
+      "MAP5_a_subset_without_in_pool_train_history": 0.34632768361581917,
+      "n_a_with_history": 4740,
+      "n_a_without_history": 59,
+      "seconds": 0.17
+    },
+    "H": {
+      "MAP5_a_users_with_truth": 0.5759736982241671,
+      "MAP5_b_submission_users": 0.6797169312169312,
+      "MAP5_a_subset_with_in_pool_train_history": 0.5788321612751993,
+      "MAP5_a_subset_without_in_pool_train_history": 0.34632768361581917,
+      "n_a_with_history": 4740,
+      "n_a_without_history": 59,
+      "seconds": 0.75
+    }
+  },
+  "popularity_top10": [
+    {
+      "tv_show_id": 2400480,
+      "n_train_users": 4390,
+      "title": "'ТСН. Неделя'.",
+      "category": "Инфо"
+    },
+    {
+      "tv_show_id": 240081,
+      "n_train_users": 4098,
+      "title": "Факты. День.",
+      "category": "Инфо"
+    },
+    {
+      "tv_show_id": 2400508,
+      "n_train_users": 3698,
+      "title": "Сегодня. Итоги с Олегом Панютой.",
+      "category": "Инфо"
+    },
+    {
+      "tv_show_id": 6500479,
+      "n_train_users": 3671,
+      "title": "'Мир наизнанку. Бразилия', 36 эп.",
+      "category": "Познавательное"
+    },
+    {
+      "tv_show_id": 2400467,
+      "n_train_users": 3590,
+      "title": "'Викна-Новости'.",
+      "category": "Инфо"
+    },
+    {
+      "tv_show_id": 10002514,
+      "n_train_users": 3115,
+      "title": "Т/с 'Кухня', 1 сезон, 1-4 с.",
+      "category": "Сериалы"
+    },
+    {
+      "tv_show_id": 200352,
+      "n_train_users": 3012,
+      "title": "'Вечерний квартал'.",
+      "category": "Развлечения"
+    },
+    {
+      "tv_show_id": 6700482,
+      "n_train_users": 2969,
+      "title": "'Секретные материалы'.",
+      "category": "Другое"
+    },
+    {
+      "tv_show_id": 20088,
+      "n_train_users": 2814,
+      "title": "'Завтрак с 1+1'. Информационно-развлекательная программа.",
+      "category": "Развлечения"
+    },
+    {
+      "tv_show_id": 700389,
+      "n_train_users": 2769,
+      "title": "Кто сверху?, 6 сезон, 7 эп.",
+      "category": "Развлечения"
+    }
+  ],
+  "hand_check_user": 8377619604347126107,
+  "hand_check_lines": [
+    "Submission user 8377619604347126107 (first in template order with >=5 validation positives and >=1 in-pool TRAIN positive); validation positives: 92",
+    "**Method P** top-5:",
+    "  1. id=2400480 | 'ТСН. Неделя'. | Инфо",
+    "  2. id=240081 | Факты. День. | Инфо",
+    "  3. id=2400508 | Сегодня. Итоги с Олегом Панютой. | Инфо",
+    "  4. id=6500479 | 'Мир наизнанку. Бразилия', 36 эп. | Познавательное",
+    "  5. id=2400467 | 'Викна-Новости'. | Инфо",
+    "  truth set (92): [20088, 100076, 200337, 200338, 200344, 200352, 200432, 200477, 200506, 240081, 400294, 400335, 400356, 400361, 400387, 400426, 500315, 500331, 500346, 700369, 700389, 1100411, 1100412, 2400467, 2400480, 2400508, 2500430, 5200303, 5800509, 5900256, 5900347, 5900348, 6000483, 6200371, 6200392, 6300336, 6500479, 6600437, 6700482, 10001499, 10002514, 10002515, 10002697, 10002947, 10003011, 10003167, 12002172, 12002896, 12002955, 12003004, 90021642, 90025700, 90026021, 90030050, 90032868, 90034561, 90036372, 90037203, 90038464, 90041065, 90041275, 90041425, 90041910, 90042851, 90044740, 90044905, 90045291, 90046928, 90046966, 90048220, 90048751, 90050976, 90052055, 90053203, 90056386, 90059058, 90062152, 90063447, 90069026, 90070560, 90073996, 90077794, 90078182, 90079260, 90079286, 90079688, 90079742, 90081012, 90081922, 90082182, 90082234, 90082814]",
+    "  rel vector: [1, 1, 1, 1, 1]",
+    "  k=1: hits=1, P@1=1/1=1.0000, rel=1 -> 1.0000",
+    "  k=2: hits=2, P@2=2/2=1.0000, rel=1 -> 1.0000",
+    "  k=3: hits=3, P@3=3/3=1.0000, rel=1 -> 1.0000",
+    "  k=4: hits=4, P@4=4/4=1.0000, rel=1 -> 1.0000",
+    "  k=5: hits=5, P@5=5/5=1.0000, rel=1 -> 1.0000",
+    "  AP@5 = 5.0000 / min(5,92)=5 = 1.000000  (function: 1.000000)",
+    "**Method H** top-5:",
+    "  1. id=2400480 | 'ТСН. Неделя'. | Инфо",
+    "  2. id=240081 | Факты. День. | Инфо",
+    "  3. id=20088 | 'Завтрак с 1+1'. Информационно-развлекательная программа. | Развлечения",
+    "  4. id=200337 | 'Утро с 'Интером'. | Развлечения",
+    "  5. id=200352 | 'Вечерний квартал'. | Развлечения",
+    "  truth set (92): [20088, 100076, 200337, 200338, 200344, 200352, 200432, 200477, 200506, 240081, 400294, 400335, 400356, 400361, 400387, 400426, 500315, 500331, 500346, 700369, 700389, 1100411, 1100412, 2400467, 2400480, 2400508, 2500430, 5200303, 5800509, 5900256, 5900347, 5900348, 6000483, 6200371, 6200392, 6300336, 6500479, 6600437, 6700482, 10001499, 10002514, 10002515, 10002697, 10002947, 10003011, 10003167, 12002172, 12002896, 12002955, 12003004, 90021642, 90025700, 90026021, 90030050, 90032868, 90034561, 90036372, 90037203, 90038464, 90041065, 90041275, 90041425, 90041910, 90042851, 90044740, 90044905, 90045291, 90046928, 90046966, 90048220, 90048751, 90050976, 90052055, 90053203, 90056386, 90059058, 90062152, 90063447, 90069026, 90070560, 90073996, 90077794, 90078182, 90079260, 90079286, 90079688, 90079742, 90081012, 90081922, 90082182, 90082234, 90082814]",
+    "  rel vector: [1, 1, 1, 1, 1]",
+    "  k=1: hits=1, P@1=1/1=1.0000, rel=1 -> 1.0000",
+    "  k=2: hits=2, P@2=2/2=1.0000, rel=1 -> 1.0000",
+    "  k=3: hits=3, P@3=3/3=1.0000, rel=1 -> 1.0000",
+    "  k=4: hits=4, P@4=4/4=1.0000, rel=1 -> 1.0000",
+    "  k=5: hits=5, P@5=5/5=1.0000, rel=1 -> 1.0000",
+    "  AP@5 = 5.0000 / min(5,92)=5 = 1.000000  (function: 1.000000)"
+  ],
+  "final_run_check": {
+    "file": "outputs\\cache\\_final_run_format_check_P.csv",
+    "pool_size_weeks_31_42": 6632,
+    "header_equals_template": true,
+    "rows": 1260,
+    "user_order_equals_template": true,
+    "all_rows_five_distinct_ids": true,
+    "all_ids_in_final_pool": true,
+    "train_positive_pairs_weeks_11_30": 962976,
+    "seconds": 12.0
+  },
+  "runtime": {
+    "interactions_load_or_build_s": 50.6,
+    "total_s": 94.5
+  }
+}

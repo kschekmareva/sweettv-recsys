@@ -1,0 +1,481 @@
+{
+  "seed": 42,
+  "threshold_sec": 300,
+  "sizes": {
+    "pool": 6361,
+    "users_union": 4813,
+    "eval_users": 4799,
+    "submission_users": 1260,
+    "train_labelled_pairs": 857222,
+    "train_positive_pairs": 582559
+  },
+  "split": {
+    "tune_users": 2399,
+    "report_users": 2400,
+    "submission_users_in_tune": 610,
+    "submission_users_in_report": 636
+  },
+  "mf_grid": [
+    {
+      "factors": 32,
+      "reg": 0.01,
+      "alpha": 10,
+      "fit_s": 11.26,
+      "score_s": 0.95,
+      "map_tune": 0.14649078319670233,
+      "map_report": 0.13755625,
+      "map_full": 0.14202258572387766,
+      "map_submission": 0.12563227513227512,
+      "hybrid_best_w_on_tune": 0.6,
+      "hybrid_tune_map": 0.6409080172294012
+    },
+    {
+      "factors": 32,
+      "reg": 0.01,
+      "alpha": 40,
+      "fit_s": 9.27,
+      "score_s": 0.46,
+      "map_tune": 0.0640277198832847,
+      "map_report": 0.05635208333333334,
+      "map_full": 0.060189101896228385,
+      "map_submission": 0.047224867724867725,
+      "hybrid_best_w_on_tune": 0.0,
+      "hybrid_tune_map": 0.639475475892733
+    },
+    {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 10,
+      "fit_s": 3.4,
+      "score_s": 0.41,
+      "map_tune": 0.1506828076513362,
+      "map_report": 0.1391355324074074,
+      "map_full": 0.14490796693755642,
+      "map_submission": 0.12697089947089948,
+      "hybrid_best_w_on_tune": 0.6,
+      "hybrid_tune_map": 0.6407148812005002
+    },
+    {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 40,
+      "fit_s": 3.29,
+      "score_s": 0.39,
+      "map_tune": 0.06548944004446297,
+      "map_report": 0.05721180555555556,
+      "map_full": 0.06134976036674306,
+      "map_submission": 0.05052645502645503,
+      "hybrid_best_w_on_tune": 0.0,
+      "hybrid_tune_map": 0.639475475892733
+    },
+    {
+      "factors": 64,
+      "reg": 0.01,
+      "alpha": 10,
+      "fit_s": 3.57,
+      "score_s": 0.42,
+      "map_tune": 0.11062398684637118,
+      "map_report": 0.10237361111111111,
+      "map_full": 0.10649793938552013,
+      "map_submission": 0.08890740740740741,
+      "hybrid_best_w_on_tune": 0.7,
+      "hybrid_tune_map": 0.6410909638275207
+    },
+    {
+      "factors": 64,
+      "reg": 0.01,
+      "alpha": 40,
+      "fit_s": 3.66,
+      "score_s": 0.36,
+      "map_tune": 0.05806169237182159,
+      "map_report": 0.05406388888888889,
+      "map_full": 0.05606237410571646,
+      "map_submission": 0.047801587301587296,
+      "hybrid_best_w_on_tune": 0.0,
+      "hybrid_tune_map": 0.639475475892733
+    },
+    {
+      "factors": 64,
+      "reg": 0.1,
+      "alpha": 10,
+      "fit_s": 3.45,
+      "score_s": 0.32,
+      "map_tune": 0.10992716872771065,
+      "map_report": 0.10510277777777778,
+      "map_full": 0.10751447060730243,
+      "map_submission": 0.08992328042328042,
+      "hybrid_best_w_on_tune": 0.6,
+      "hybrid_tune_map": 0.6407533231439027
+    },
+    {
+      "factors": 64,
+      "reg": 0.1,
+      "alpha": 40,
+      "fit_s": 3.63,
+      "score_s": 0.28,
+      "map_tune": 0.0596526330415451,
+      "map_report": 0.05439861111111111,
+      "map_full": 0.05702507466833368,
+      "map_submission": 0.04982539682539683,
+      "hybrid_best_w_on_tune": 0.0,
+      "hybrid_tune_map": 0.639475475892733
+    }
+  ],
+  "mf_best_cfg": {
+    "factors": 32,
+    "reg": 0.1,
+    "alpha": 10
+  },
+  "mf_best_coverage": {
+    "pool_items_with_factors": 2198,
+    "users_valid_eval": 4746,
+    "users_valid_submission": 1250
+  },
+  "cbf_features": {
+    "n_items": 9671,
+    "block_dims": {
+      "category": 8,
+      "genre": 65,
+      "people_tfidf": 16796,
+      "decade": 12
+    },
+    "share_with_genre": 0.9761141557232964,
+    "share_with_people": 0.9859373384344949,
+    "share_with_decade": 0.9985523730741391,
+    "share_labelled_with_non_category_feature_all": 0.9995863923068969,
+    "share_pool_with_non_category_feature": 0.9996855840276686,
+    "pool_items_with_metadata_row": 6361
+  },
+  "cbf_coverage": {
+    "users_valid_eval": 4743,
+    "users_valid_submission": 1250
+  },
+  "hybrid_tuning_on_tune": {
+    "pop_mf": [
+      [
+        0.0,
+        0.639475475892733
+      ],
+      [
+        0.1,
+        0.639475475892733
+      ],
+      [
+        0.2,
+        0.639475475892733
+      ],
+      [
+        0.3,
+        0.6395032652494094
+      ],
+      [
+        0.4,
+        0.6398575795470335
+      ],
+      [
+        0.5,
+        0.6405106294289288
+      ],
+      [
+        0.6,
+        0.6407148812005002
+      ],
+      [
+        0.7,
+        0.6401174100319578
+      ],
+      [
+        0.8,
+        0.6315800565050252
+      ],
+      [
+        0.9,
+        0.3800874206845445
+      ],
+      [
+        1.0,
+        0.1506828076513362
+      ]
+    ],
+    "pop_cbf": [
+      [
+        0.0,
+        0.639475475892733
+      ],
+      [
+        0.1,
+        0.6395748228428512
+      ],
+      [
+        0.2,
+        0.6293061923949794
+      ],
+      [
+        0.3,
+        0.6003508406280395
+      ],
+      [
+        0.4,
+        0.5404075772312538
+      ],
+      [
+        0.5,
+        0.4143514658885647
+      ],
+      [
+        0.6,
+        0.20798666110879532
+      ],
+      [
+        0.7,
+        0.11870501597888009
+      ],
+      [
+        0.8,
+        0.09420730860080591
+      ],
+      [
+        0.9,
+        0.07467833819647075
+      ],
+      [
+        1.0,
+        0.04579685980269557
+      ]
+    ],
+    "three_way_best5": [
+      [
+        [
+          0.6,
+          0.0
+        ],
+        0.6407148812005002
+      ],
+      [
+        [
+          0.5,
+          0.0
+        ],
+        0.6405106294289288
+      ],
+      [
+        [
+          0.3,
+          0.1
+        ],
+        0.640154230929554
+      ],
+      [
+        [
+          0.4,
+          0.1
+        ],
+        0.6401243573711268
+      ],
+      [
+        [
+          0.7,
+          0.0
+        ],
+        0.6401174100319578
+      ]
+    ],
+    "chosen": {
+      "w_mf": 0.6,
+      "w_cbf": 0.1,
+      "three_way_w_mf": 0.6,
+      "three_way_w_cbf": 0.0
+    }
+  },
+  "table": {
+    "P": {
+      "tune": 0.639475475892733,
+      "report": 0.6321541666666667,
+      "full": 0.6358140584844064,
+      "submission": 0.743089947089947,
+      "mean_train_popularity": 3889.39990234375,
+      "repeat_share_train_positive": 0.8022087934986456,
+      "repeat_share_any_train_pair": 0.8465930402167118,
+      "fit_s": 0.18,
+      "score_s": 0.19,
+      "lists_needing_pop_fill_eval": 0,
+      "lists_needing_pop_fill_submission": 0,
+      "fill_definition": "is the popularity list",
+      "spec": null
+    },
+    "H": {
+      "tune": 0.5773490111620583,
+      "report": 0.5745989583333333,
+      "full": 0.5759736982241671,
+      "submission": 0.6797169312169312,
+      "mean_train_popularity": 2387.426513671875,
+      "repeat_share_train_positive": 0.9836215878307981,
+      "repeat_share_any_train_pair": 0.9838299645759533,
+      "fit_s": 1.63,
+      "score_s": 2.48,
+      "lists_needing_pop_fill_eval": 98,
+      "lists_needing_pop_fill_submission": 16,
+      "fill_definition": "lists with < 5 own in-pool TRAIN positives (rest filled by P)",
+      "spec": null
+    },
+    "MF": {
+      "tune": 0.1506828076513362,
+      "report": 0.1391355324074074,
+      "full": 0.14490796693755642,
+      "submission": 0.12697089947089948,
+      "mean_train_popularity": 1082.2568359375,
+      "repeat_share_train_positive": 0.3681183579912482,
+      "repeat_share_any_train_pair": 0.45105230256303397,
+      "fit_s": 3.4,
+      "score_s": 0.75,
+      "lists_needing_pop_fill_eval": 53,
+      "lists_needing_pop_fill_submission": 10,
+      "fill_definition": "lists where a used component is invalid for the user (its weight goes to popularity)",
+      "spec": {
+        "w_mf": 1.0
+      }
+    },
+    "CBF": {
+      "tune": 0.04579685980269557,
+      "report": 0.040968055555555556,
+      "full": 0.043381954573869556,
+      "submission": 0.04953968253968254,
+      "mean_train_popularity": 381.3810729980469,
+      "repeat_share_train_positive": 0.23284017503646592,
+      "repeat_share_any_train_pair": 0.25017712023338196,
+      "fit_s": 9.05,
+      "score_s": 1.98,
+      "lists_needing_pop_fill_eval": 56,
+      "lists_needing_pop_fill_submission": 10,
+      "fill_definition": "lists where a used component is invalid for the user (its weight goes to popularity)",
+      "spec": {
+        "w_cbf": 1.0
+      }
+    },
+    "Hybrid pop+MF": {
+      "tune": 0.6407148812005002,
+      "report": 0.6339263888888889,
+      "full": 0.6373199277627283,
+      "submission": 0.74444708994709,
+      "mean_train_popularity": 3883.135009765625,
+      "repeat_share_train_positive": 0.8029172744321734,
+      "repeat_share_any_train_pair": 0.8474265471973328,
+      "fit_s": 3.4,
+      "score_s": 1.15,
+      "lists_needing_pop_fill_eval": 53,
+      "lists_needing_pop_fill_submission": 10,
+      "fill_definition": "lists where a used component is invalid for the user (its weight goes to popularity)",
+      "spec": {
+        "w_mf": 0.6
+      }
+    },
+    "Hybrid pop+CBF": {
+      "tune": 0.6395748228428512,
+      "report": 0.6323,
+      "full": 0.6359366534694727,
+      "submission": 0.7431560846560845,
+      "mean_train_popularity": 3889.38037109375,
+      "repeat_share_train_positive": 0.8022504688476766,
+      "repeat_share_any_train_pair": 0.8466347155657429,
+      "fit_s": 9.05,
+      "score_s": 2.25,
+      "lists_needing_pop_fill_eval": 56,
+      "lists_needing_pop_fill_submission": 10,
+      "fill_definition": "lists where a used component is invalid for the user (its weight goes to popularity)",
+      "spec": {
+        "w_cbf": 0.1
+      }
+    },
+    "Hybrid pop+MF+CBF": {
+      "tune": 0.6407148812005002,
+      "report": 0.6339263888888889,
+      "full": 0.6373199277627283,
+      "submission": 0.74444708994709,
+      "mean_train_popularity": 3883.135009765625,
+      "repeat_share_train_positive": 0.8029172744321734,
+      "repeat_share_any_train_pair": 0.8474265471973328,
+      "fit_s": 3.4,
+      "score_s": 0.76,
+      "lists_needing_pop_fill_eval": 53,
+      "lists_needing_pop_fill_submission": 10,
+      "fill_definition": "lists where a used component is invalid for the user (its weight goes to popularity)",
+      "spec": {
+        "w_mf": 0.6,
+        "w_cbf": 0.0
+      }
+    }
+  },
+  "best_by_report": "Hybrid pop+MF",
+  "best_hybrid_by_report": "Hybrid pop+MF",
+  "step2_reproduced": {
+    "P_full_matches_step2": true,
+    "H_full_matches_step2": true
+  },
+  "final": {
+    "pool_size": 6632,
+    "train_positive_pairs_weeks_11_30": 962976,
+    "train_labelled_pairs_weeks_11_30": 1371170,
+    "mf_pool_items_with_factors": 3111,
+    "pool_items_with_popularity_gt0": 3072,
+    "mf_users_valid": 1258,
+    "cbf_users_valid": 1258,
+    "submission_users": 1260,
+    "mf_cfg": {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 10
+    },
+    "build_seconds": 6.7,
+    "files": {
+      "P": {
+        "file": "outputs\\submissions\\submission_P.csv",
+        "header_ok": true,
+        "rows": 1260,
+        "user_order_ok": true,
+        "five_distinct_ids": true,
+        "all_ids_in_final_pool": true,
+        "spec": null,
+        "hybrid_name": null
+      },
+      "MF": {
+        "file": "outputs\\submissions\\submission_MF.csv",
+        "header_ok": true,
+        "rows": 1260,
+        "user_order_ok": true,
+        "five_distinct_ids": true,
+        "all_ids_in_final_pool": true,
+        "spec": {
+          "w_mf": 1.0
+        },
+        "hybrid_name": null
+      },
+      "CBF": {
+        "file": "outputs\\submissions\\submission_CBF.csv",
+        "header_ok": true,
+        "rows": 1260,
+        "user_order_ok": true,
+        "five_distinct_ids": true,
+        "all_ids_in_final_pool": true,
+        "spec": {
+          "w_cbf": 1.0
+        },
+        "hybrid_name": null
+      },
+      "HYBRID": {
+        "file": "outputs\\submissions\\submission_HYBRID.csv",
+        "header_ok": true,
+        "rows": 1260,
+        "user_order_ok": true,
+        "five_distinct_ids": true,
+        "all_ids_in_final_pool": true,
+        "spec": {
+          "w_mf": 0.6
+        },
+        "hybrid_name": "Hybrid pop+MF"
+      }
+    }
+  },
+  "runtime": {
+    "total_s": 169.3
+  }
+}

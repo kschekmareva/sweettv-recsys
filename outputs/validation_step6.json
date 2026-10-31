@@ -1,0 +1,275 @@
+{
+  "rule": "Pre-declared rule from now on: VTOP5 is the PRIMARY validation criterion, because it matches the task shape (exactly 5 ids per user; truth = the user's most-completed programmes; definition taken from the cited public notebook). V300, V900 and VHALF are robustness checks. The Kaggle number was used once, only to check that P's VTOP5 score (0.270-0.296) is plausible against the leaderboard (0.278); no weights or hyperparameters are chosen from Kaggle.",
+  "weights_vtop5_tuned": {
+    "MF": 0.2,
+    "PPR": 0.1,
+    "H2": 0.5
+  },
+  "weights_step5_shared": {
+    "MF": 0.3,
+    "PPR": 0.4,
+    "H2": 0.1
+  },
+  "rows": {
+    "P": {
+      "V300": {
+        "report": 0.6321541666666667,
+        "full": 0.6358140584844064,
+        "submission": 0.743089947089947,
+        "repeat_share_train_positive_full": 0.8022087934986456,
+        "mean_train_popularity_full": 3889.39990234375
+      },
+      "V900": {
+        "report": 0.5685616406540319,
+        "full": 0.5726537656903766,
+        "submission": 0.673679012345679,
+        "repeat_share_train_positive_full": 0.803723849372385,
+        "mean_train_popularity_full": 3889.39990234375
+      },
+      "VHALF": {
+        "report": 0.47450385964912284,
+        "full": 0.48220847724442567,
+        "submission": 0.5535251322751322,
+        "repeat_share_train_positive_full": 0.8076126030873335,
+        "mean_train_popularity_full": 3889.400146484375
+      },
+      "VTOP5": {
+        "report": 0.2699238312862991,
+        "full": 0.27093324478904923,
+        "submission": 0.2958928571428571,
+        "repeat_share_train_positive_full": 0.8134395864742623,
+        "mean_train_popularity_full": 3889.39990234375
+      }
+    },
+    "step-4 blend": {
+      "V300": {
+        "report": 0.6909166666666667,
+        "full": 0.6967314371049523,
+        "submission": 0.7963862433862433,
+        "repeat_share_train_positive_full": 0.9813294436340905,
+        "mean_train_popularity_full": 3231.55712890625
+      },
+      "V900": {
+        "report": 0.6408432041991824,
+        "full": 0.6473405392840539,
+        "submission": 0.748058201058201,
+        "repeat_share_train_positive_full": 0.9825523012552301,
+        "mean_train_popularity_full": 3231.482421875
+      },
+      "VHALF": {
+        "report": 0.5429046783625732,
+        "full": 0.5520324357980311,
+        "submission": 0.6279900793650793,
+        "repeat_share_train_positive_full": 0.9833368576866145,
+        "mean_train_popularity_full": 3236.48095703125
+      },
+      "VTOP5": {
+        "report": 0.3180062839188803,
+        "full": 0.31981238184124244,
+        "submission": 0.3481545414462081,
+        "repeat_share_train_positive_full": 0.9847512384234332,
+        "mean_train_popularity_full": 3244.08935546875
+      }
+    },
+    "step-5 blend (shared w)": {
+      "V300": {
+        "report": 0.6895048611111111,
+        "full": 0.6950254103864231,
+        "submission": 0.7949973544973544,
+        "repeat_share_train_positive_full": 0.9808710147947489,
+        "mean_train_popularity_full": 3195.861083984375
+      },
+      "V900": {
+        "report": 0.6394999535488666,
+        "full": 0.6465734542073455,
+        "submission": 0.7472283950617283,
+        "repeat_share_train_positive_full": 0.982092050209205,
+        "mean_train_popularity_full": 3195.5634765625
+      },
+      "VHALF": {
+        "report": 0.5505087719298246,
+        "full": 0.5604881229294424,
+        "submission": 0.6395171957671958,
+        "repeat_share_train_positive_full": 0.9828293508141256,
+        "mean_train_popularity_full": 3200.562744140625
+      },
+      "VTOP5": {
+        "report": 0.33446074930972103,
+        "full": 0.3369098643118673,
+        "submission": 0.37004563492063497,
+        "repeat_share_train_positive_full": 0.9841481800559982,
+        "mean_train_popularity_full": 3207.325927734375
+      }
+    },
+    "step-6 FINAL (VTOP5-tuned w)": {
+      "V300": {
+        "report": 0.6548423611111112,
+        "full": 0.6561943460443148,
+        "submission": 0.7516031746031746,
+        "repeat_share_train_positive_full": 0.9557824546780579,
+        "mean_train_popularity_full": 3099.6474609375
+      },
+      "V900": {
+        "report": 0.6042505109624674,
+        "full": 0.6061082635983264,
+        "submission": 0.6995229276895943,
+        "repeat_share_train_positive_full": 0.9573640167364017,
+        "mean_train_popularity_full": 3097.84423828125
+      },
+      "VHALF": {
+        "report": 0.5553922807017544,
+        "full": 0.5591448156763233,
+        "submission": 0.6372579365079365,
+        "repeat_share_train_positive_full": 0.9597377881158807,
+        "mean_train_popularity_full": 3097.885498046875
+      },
+      "VTOP5": {
+        "report": 0.3630199704846234,
+        "full": 0.3644227271639505,
+        "submission": 0.39906613756613757,
+        "repeat_share_train_positive_full": 0.9636441955632135,
+        "mean_train_popularity_full": 3095.788818359375
+      }
+    }
+  },
+  "significance": {
+    "P": {
+      "V300": {
+        "n_users": 2400,
+        "mean_diff": 0.022688194444444445,
+        "ci95": [
+          0.013604010416666664,
+          0.03203824652777777
+        ]
+      },
+      "V900": {
+        "n_users": 2392,
+        "mean_diff": 0.035688870308435525,
+        "ci95": [
+          0.026531421288554444,
+          0.04500085063638052
+        ]
+      },
+      "VHALF": {
+        "n_users": 2375,
+        "mean_diff": 0.08088842105263158,
+        "ci95": [
+          0.07163564035087719,
+          0.08977779824561403
+        ]
+      },
+      "VTOP5": {
+        "n_users": 2334,
+        "mean_diff": 0.0930961391983243,
+        "ci95": [
+          0.08553224971436732,
+          0.10127189850518897
+        ]
+      }
+    },
+    "step-4 blend": {
+      "V300": {
+        "n_users": 2400,
+        "mean_diff": -0.036074305555555554,
+        "ci95": [
+          -0.04293762152777779,
+          -0.029340234375000007
+        ]
+      },
+      "V900": {
+        "n_users": 2392,
+        "mean_diff": -0.036592693236714983,
+        "ci95": [
+          -0.04351708821070234,
+          -0.02938547473058343
+        ]
+      },
+      "VHALF": {
+        "n_users": 2375,
+        "mean_diff": 0.012487602339181286,
+        "ci95": [
+          0.005944222222222219,
+          0.018946801169590643
+        ]
+      },
+      "VTOP5": {
+        "n_users": 2334,
+        "mean_diff": 0.045013686565743116,
+        "ci95": [
+          0.039599444801485285,
+          0.05076843223364753
+        ]
+      }
+    },
+    "step-5 blend (shared w)": {
+      "V300": {
+        "n_users": 2400,
+        "mean_diff": -0.034662500000000006,
+        "ci95": [
+          -0.040059930555555553,
+          -0.02881427083333334
+        ]
+      },
+      "V900": {
+        "n_users": 2392,
+        "mean_diff": -0.03524944258639911,
+        "ci95": [
+          -0.04118994449089558,
+          -0.029663856373095508
+        ]
+      },
+      "VHALF": {
+        "n_users": 2375,
+        "mean_diff": 0.004883508771929825,
+        "ci95": [
+          -0.0009161929824561404,
+          0.010320450292397658
+        ]
+      },
+      "VTOP5": {
+        "n_users": 2334,
+        "mean_diff": 0.028559221174902408,
+        "ci95": [
+          0.024082080715033802,
+          0.033071307007521665
+        ]
+      }
+    }
+  },
+  "reproduction_abs_diff_max": 0.0,
+  "final": {
+    "file": "outputs\\submissions\\submission_FINAL_vtop5.csv",
+    "checks": {
+      "file": "outputs\\submissions\\submission_FINAL_vtop5.csv",
+      "header_ok": true,
+      "rows": 1260,
+      "user_order_ok": true,
+      "five_distinct_ids": true,
+      "all_ids_in_final_pool": true
+    },
+    "weights": {
+      "MF": 0.2,
+      "PPR": 0.1,
+      "H2": 0.5,
+      "P-air": 0.2
+    },
+    "pool_size": 6632,
+    "users_without_component_data": {
+      "H2": 5,
+      "MF": 2,
+      "PPR": 2
+    },
+    "users_with_any_missing_component": 5,
+    "repeat_share_train_positive": 0.9914285714285714,
+    "mean_overlap_with_step5_chosen_file": 0.759047619047619,
+    "h2_c": 0.5,
+    "mf_cfg": {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 0.3
+    },
+    "ppr_alpha": 0.3,
+    "popularity_base": "P-air (31-42 schedule used only for airing counts)"
+  },
+  "runtime_s": 88.4
+}

@@ -1,0 +1,14 @@
+method,source,VTOP5_REPORT,V300_REPORT
+"P (popularity)","step 5",0.2699,0.6322
+"P-rec (last 4 TRAIN weeks)","step 4 (VTOP5 not computed)",,0.6350
+"P-air (popularity x log1p(target airings))","step 5",0.2748,0.6315
+"H (own history, step 2)","step 5",0.2361,0.5746
+"H2 (completed airings, decay)","step 5",0.3482,0.5834
+"CBF (content-based)","step 4 (VTOP5 not computed)",,0.0431
+"MF (ALS, alpha 0.3, pure)","step 5",0.1525,0.5199
+"PPR (alpha 0.3, pure)","step 5",0.2580,0.6028
+"AR (rules, max, pure)","step 5",0.2777,0.6365
+"step-4 blend (P-air 0.2, MF 0.4, PPR 0.4)","step 5",0.3180,0.6909
+"step-6 blend (P-air 0.2, MF 0.2, PPR 0.1, H2 0.5)","step 7",0.3630,0.6548
+"step-7 reranker (LightGBM, fit on TUNE)","step 7",0.4047,0.6819
+"oracle (perfect ranking of the 6-component top-50 union)","step 7",0.7959,0.9589

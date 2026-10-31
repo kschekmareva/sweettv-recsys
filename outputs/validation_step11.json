@@ -1,0 +1,52 @@
+{
+  "rule": "if 100% > 50% in both folds the final model is fitted on ALL validation users with the same settings and number of trees; otherwise the step-7 final fitting (TUNE-fitted model) is kept",
+  "learning_curve": {
+    "0.25": {
+      "A": 0.38445479862896315,
+      "A_users": 577,
+      "B": 0.39112217891343054,
+      "B_users": 584
+    },
+    "0.5": {
+      "A": 0.398031752832524,
+      "A_users": 1154,
+      "B": 0.39924173523892015,
+      "B_users": 1167
+    },
+    "1.0": {
+      "A": 0.40469889555365135,
+      "A_users": 2309,
+      "B": 0.4064692507579038,
+      "B_users": 2334
+    }
+  },
+  "fold_best_iterations": {
+    "A": 174,
+    "B": 110
+  },
+  "fold_vtop5_reproduced": {
+    "A": 0.40469889555365135,
+    "B": 0.4064692507579038
+  },
+  "rounds": 142,
+  "fit_users": 4643,
+  "final": {
+    "file": "outputs\\submissions\\submission_STEP7_all.csv",
+    "header_ok": true,
+    "rows": 1260,
+    "user_order_ok": true,
+    "five_distinct_ids": true,
+    "all_ids_in_final_pool": true,
+    "users_without_component_data": {
+      "H2": 23,
+      "PPR": 14,
+      "MF": 14,
+      "AR": 14,
+      "EW": 14
+    },
+    "repeat_share_train_positive": 0.9265079365079366,
+    "share_of_ids_shared_with_submission_STEP7": 0.9120634920634919,
+    "share_of_users_with_identical_list": 0.596031746031746
+  },
+  "runtime_s": 160.7
+}

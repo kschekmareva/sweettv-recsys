@@ -1,0 +1,10 @@
+data/
+__pycache__/
+*.pyc
+outputs/cache/
+
+# credentials and local secrets
+.kaggle/
+kaggle.json
+*.token
+.env

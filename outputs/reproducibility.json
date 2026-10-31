@@ -1,0 +1,11 @@
+{
+  "command": "python src/make_final.py --rebuild --out outputs/submissions/repro_STEP7_all.csv",
+  "sha256_submission_STEP7_all": "0ebca31a6acbf136df9747f6f78ebdd59d8c41a73a041f0a3c07ca1e664c7430",
+  "sha256_repro_STEP7_all": "0ebca31a6acbf136df9747f6f78ebdd59d8c41a73a041f0a3c07ca1e664c7430",
+  "byte_identical": true,
+  "lines_identical": 1261,
+  "lines_total": 1261,
+  "make_final_seconds_with_rebuild": 185.4,
+  "wall_seconds_incl_python_start": 188.3,
+  "note": "A first run exposed a bug in make_final.py (numpy cast the 64-bit user ids to float64 when selecting the users to fit on, so only 15 users were fitted); it was fixed (set membership + an assertion that 4,643 users are fitted) and the run repeated. The committed final file was produced by src/run_step11.py and was not affected."
+}

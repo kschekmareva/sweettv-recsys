@@ -1,0 +1,1579 @@
+{
+  "seed": 42,
+  "variants": [
+    "V300",
+    "V900",
+    "VHALF",
+    "VTOP5"
+  ],
+  "idea_source": "kinahem, 'gornyaki final solution' (Kaggle notebook), https://www.kaggle.com/code/kinahem/gornyaki-final-solution - concept only, no code copied",
+  "airing_consistency": {
+    "airing_rows_val": 1188848,
+    "user_show_pairs": 658368,
+    "interaction_pairs_val": 658368,
+    "share_max_pct_equals_max_frac": 1.0,
+    "airings_with_pct_ge_0.8": 295883
+  },
+  "sizes": {
+    "pool_full": 6361,
+    "users_universe": 4813,
+    "tune_users_V300": 2399,
+    "report_users_V300": 2400,
+    "submission_users": 1260
+  },
+  "variant_stats": {
+    "V300": {
+      "positive_pairs": 478219,
+      "users_with_truth": 4799,
+      "tune_users": 2399,
+      "report_users": 2400,
+      "submission_users_with_truth": 1246,
+      "positives_per_user_quantiles": {
+        "0.1": 19.0,
+        "0.25": 42.0,
+        "0.5": 81.0,
+        "0.75": 139.0,
+        "0.9": 205.0
+      },
+      "positives_per_user_mean": 99.64971869139404
+    },
+    "V900": {
+      "positive_pairs": 364507,
+      "users_with_truth": 4780,
+      "tune_users": 2388,
+      "report_users": 2392,
+      "submission_users_with_truth": 1245,
+      "positives_per_user_quantiles": {
+        "0.1": 13.0,
+        "0.25": 29.0,
+        "0.5": 60.0,
+        "0.75": 108.0,
+        "0.9": 161.0
+      },
+      "positives_per_user_mean": 76.25669456066946
+    },
+    "VHALF": {
+      "positive_pairs": 209769,
+      "users_with_truth": 4729,
+      "tune_users": 2354,
+      "report_users": 2375,
+      "submission_users_with_truth": 1244,
+      "positives_per_user_quantiles": {
+        "0.1": 6.0,
+        "0.25": 14.0,
+        "0.5": 30.0,
+        "0.75": 59.0,
+        "0.9": 103.0
+      },
+      "positives_per_user_mean": 44.35800380630155
+    },
+    "VTOP5": {
+      "positive_pairs": 21689,
+      "users_with_truth": 4643,
+      "tune_users": 2309,
+      "report_users": 2334,
+      "submission_users_with_truth": 1238,
+      "positives_per_user_quantiles": {
+        "0.1": 4.0,
+        "0.25": 5.0,
+        "0.5": 5.0,
+        "0.75": 5.0,
+        "0.9": 5.0
+      },
+      "positives_per_user_mean": 4.671333189748008,
+      "users_with_exactly_5_truth_items": 4030,
+      "report_users_exactly_5": 2019,
+      "shows_with_ge1_airing_pct80_per_user_quantiles": {
+        "0.1": 4.0,
+        "0.25": 8.0,
+        "0.5": 17.0,
+        "0.75": 38.0,
+        "0.9": 77.0
+      }
+    }
+  },
+  "h2": {
+    "c_grid": [
+      {
+        "c": 1.0,
+        "tune_V300": 0.5799148950951785,
+        "tune_V900": 0.5361803229108506,
+        "tune_VHALF": 0.5156573916737468,
+        "tune_VTOP5": 0.3452114912660604,
+        "score_s": 0.08
+      },
+      {
+        "c": 0.8,
+        "tune_V300": 0.5814030151451993,
+        "tune_V900": 0.537485459705937,
+        "tune_VHALF": 0.5170397904276409,
+        "tune_VTOP5": 0.3460815167701266,
+        "score_s": 0.1
+      },
+      {
+        "c": 0.5,
+        "tune_V300": 0.5836372794219814,
+        "tune_V900": 0.5394290898939139,
+        "tune_VHALF": 0.517691753988483,
+        "tune_VTOP5": 0.34731858428372075,
+        "score_s": 0.1
+      }
+    ],
+    "c_best": 0.5,
+    "prepare_s": 0.03,
+    "airings_pct80_train": 319978,
+    "definition": "sum over airings with view_pct>=0.8 of r*c^(days_before_train_end/60), r=5 if view_pct=1 else 2+2*view_pct^2, times log10(1+airings of the show in the TRAIN schedule); train end 2020-05-18 00:00 (validation), pure-H2 fallback and ties: P-air"
+  },
+  "pool_option": {
+    "table_tune": {
+      "none": {
+        "pool_size": 6361,
+        "P": [
+          0.639475475892733,
+          0.5767527452075192,
+          0.4899818276220146,
+          0.2719535874115779
+        ],
+        "H2": [
+          0.5836372794219814,
+          0.5394290898939139,
+          0.517691753988483,
+          0.34731858428372075
+        ]
+      },
+      "no_films": {
+        "pool_size": 1031,
+        "P": [
+          0.639475475892733,
+          0.5767527452075192,
+          0.4899818276220146,
+          0.2719535874115779
+        ],
+        "H2": [
+          0.5923322217590663,
+          0.5457798250511817,
+          0.522819432644199,
+          0.35052114912660604
+        ]
+      },
+      "no_long": {
+        "pool_size": 5908,
+        "P": [
+          0.639475475892733,
+          0.5767527452075192,
+          0.4899818276220146,
+          0.2719535874115779
+        ],
+        "H2": [
+          0.5877014728359038,
+          0.5429522613065327,
+          0.5208877324648352,
+          0.34877664693710597
+        ]
+      },
+      "no_films_no_long": {
+        "pool_size": 937,
+        "P": [
+          0.639475475892733,
+          0.5767527452075192,
+          0.4899818276220146,
+          0.2719535874115779
+        ],
+        "H2": [
+          0.5964742253716826,
+          0.5493867485576028,
+          0.5261244453884641,
+          0.3520485058466869
+        ]
+      }
+    },
+    "variants_order": [
+      "V300",
+      "V900",
+      "VHALF",
+      "VTOP5"
+    ],
+    "qualifies": {
+      "no_films": false,
+      "no_long": false,
+      "no_films_no_long": false
+    },
+    "adopted": "none",
+    "rule": "adopt only if both P and H2 improve on TUNE VTOP5 and neither loses more than 0.005 on V300/V900/VHALF; among qualifying options take the largest summed VTOP5 gain; programme duration = median airing duration in the pool-defining weeks"
+  },
+  "ppr": {
+    "alpha": 0.3,
+    "iterations_max": 13,
+    "converged_all_chunks": true,
+    "final_max_l1_change": 4.0790149569147616e-07
+  },
+  "mf": {
+    "grid": [
+      {
+        "factors": 32,
+        "reg": 0.1,
+        "alpha": 0.3,
+        "fit_s": 3.33,
+        "score_s": 0.46,
+        "hybrid_tune_mean_over_variants": 0.5198221736053961,
+        "best_w_per_variant": [
+          0.6,
+          0.6,
+          0.6,
+          0.5
+        ],
+        "pure_tune": {
+          "V300": 0.5257869019498865,
+          "V900": 0.45865903592034246,
+          "VHALF": 0.35037465779288207,
+          "VTOP5": 0.1532983253933882
+        }
+      },
+      {
+        "factors": 32,
+        "reg": 0.1,
+        "alpha": 0.5,
+        "fit_s": 3.42,
+        "score_s": 0.42,
+        "hybrid_tune_mean_over_variants": 0.5169866485516337,
+        "best_w_per_variant": [
+          0.6,
+          0.6,
+          0.6,
+          0.6
+        ],
+        "pure_tune": {
+          "V300": 0.510834607012181,
+          "V900": 0.44662095198213286,
+          "VHALF": 0.34547743793070895,
+          "VTOP5": 0.1557283095134979
+        }
+      },
+      {
+        "factors": 32,
+        "reg": 0.1,
+        "alpha": 1,
+        "fit_s": 3.59,
+        "score_s": 0.4,
+        "hybrid_tune_mean_over_variants": 0.508622120230944,
+        "best_w_per_variant": [
+          0.6,
+          0.6,
+          0.7,
+          0.7
+        ],
+        "pure_tune": {
+          "V300": 0.46209114908989857,
+          "V900": 0.40511015726782057,
+          "VHALF": 0.3220133578778439,
+          "VTOP5": 0.15110593811654877
+        }
+      },
+      {
+        "factors": 32,
+        "reg": 0.1,
+        "alpha": 3,
+        "fit_s": 3.18,
+        "score_s": 0.4,
+        "hybrid_tune_mean_over_variants": 0.5030856762548146,
+        "best_w_per_variant": [
+          0.6,
+          0.6,
+          0.3,
+          0.7
+        ],
+        "pure_tune": {
+          "V300": 0.31197802325042845,
+          "V900": 0.2690396426577331,
+          "VHALF": 0.21681865382799964,
+          "VTOP5": 0.1130702324238487
+        }
+      }
+    ],
+    "chosen": {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 0.3
+    },
+    "step4_config_kept_for_blend": {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 1
+    },
+    "same_as_step4": false
+  },
+  "ranking": {
+    "avg_rank_report": {
+      "P": 9.25,
+      "P-air": 9.25,
+      "H": 12.75,
+      "H2": 9.5,
+      "MF": 14.0,
+      "PPR": 11.25,
+      "AR": 7.75,
+      "step-4 blend": 3.25,
+      "H2+P-air": 4.5,
+      "H2+PPR": 6.5,
+      "H2+AR": 3.75,
+      "H2+MF": 7.75,
+      "P-air+MF+PPR+H2": 1.5,
+      "H2-first + step-4 blend": 3.0
+    },
+    "winner": "P-air+MF+PPR+H2",
+    "shipped_row": "P-air+MF+PPR+H2 [shared w]",
+    "rule": "winner = lowest average REPORT rank over the 4 variants (per-variant-tuned weights); shipped = the single weight set maximising the mean over the 4 variants of TUNE MAP@5 (ties: first in grid)"
+  },
+  "significance": {
+    "strategy": "P-air+MF+PPR+H2 [shared w]",
+    "resamples": 2000,
+    "vs": {
+      "P": {
+        "V300": {
+          "n_users": 2400,
+          "mean_diff": 0.05735069444444445,
+          "ci95": [
+            0.04920963541666666,
+            0.06603763888888889
+          ]
+        },
+        "V900": {
+          "n_users": 2392,
+          "mean_diff": 0.07093831289483463,
+          "ci95": [
+            0.06267460110089186,
+            0.07922299737551096
+          ]
+        },
+        "VHALF": {
+          "n_users": 2375,
+          "mean_diff": 0.07600491228070175,
+          "ci95": [
+            0.06706881578947368,
+            0.08415879824561404
+          ]
+        },
+        "VTOP5": {
+          "n_users": 2334,
+          "mean_diff": 0.06453691802342187,
+          "ci95": [
+            0.05743002296962773,
+            0.0714769292107017
+          ]
+        }
+      },
+      "step-4 blend": {
+        "V300": {
+          "n_users": 2400,
+          "mean_diff": -0.0014118055555555553,
+          "ci95": [
+            -0.004815026041666666,
+            0.0021806336805555546
+          ]
+        },
+        "V900": {
+          "n_users": 2392,
+          "mean_diff": -0.0013432506503158674,
+          "ci95": [
+            -0.00502517651430695,
+            0.0024291416991824586
+          ]
+        },
+        "VHALF": {
+          "n_users": 2375,
+          "mean_diff": 0.007604093567251463,
+          "ci95": [
+            0.003999304093567252,
+            0.011385535087719296
+          ]
+        },
+        "VTOP5": {
+          "n_users": 2334,
+          "mean_diff": 0.016454465390840712,
+          "ci95": [
+            0.013464899909549653,
+            0.01956973602780158
+          ]
+        }
+      }
+    }
+  },
+  "final": {
+    "pool_full": 6632,
+    "pool_used": 6632,
+    "pool_option": "none",
+    "c": 0.5,
+    "mf_cfg": {
+      "factors": 32,
+      "reg": 0.1,
+      "alpha": 0.3
+    },
+    "chosen": "P-air+MF+PPR+H2 [shared w]",
+    "chosen_weights": {
+      "MF": 0.3,
+      "PPR": 0.4,
+      "H2": 0.1
+    },
+    "train_positive_pairs_weeks_11_30": 962976,
+    "build_seconds": 26.1,
+    "files": {
+      "H2": {
+        "file": "outputs\\submissions\\submission_H2.csv",
+        "header_ok": true,
+        "rows": 1260,
+        "user_order_ok": true,
+        "five_distinct_ids": true,
+        "all_ids_in_final_pool": true,
+        "ids_in_restricted_pool": true,
+        "spec": {
+          "kind": "fuse",
+          "w": {
+            "H2": 1.0
+          }
+        },
+        "users_without_component_data": {
+          "H2": 5
+        }
+      },
+      "CHOSEN_step5": {
+        "file": "outputs\\submissions\\submission_CHOSEN_step5.csv",
+        "header_ok": true,
+        "rows": 1260,
+        "user_order_ok": true,
+        "five_distinct_ids": true,
+        "all_ids_in_final_pool": true,
+        "ids_in_restricted_pool": true,
+        "spec": {
+          "kind": "fuse",
+          "w": {
+            "MF": 0.3,
+            "PPR": 0.4,
+            "H2": 0.1
+          }
+        },
+        "users_without_component_data": {
+          "H2": 5,
+          "MF": 2,
+          "PPR": 2
+        }
+      }
+    }
+  },
+  "runtime": {
+    "total_s": 293.3
+  },
+  "rows": {
+    "P": {
+      "metrics": {
+        "V300": {
+          "tune": 0.639475475892733,
+          "report": 0.6321541666666667,
+          "full": 0.6358140584844064,
+          "submission": 0.743089947089947,
+          "mean_train_popularity": 3889.39990234375,
+          "repeat_share_train_positive": 0.8022087934986456,
+          "repeat_share_any_pair": 0.8465930402167118
+        },
+        "V900": {
+          "tune": 0.5767527452075192,
+          "report": 0.5685616406540319,
+          "full": 0.5726537656903766,
+          "submission": 0.673679012345679,
+          "mean_train_popularity": 3889.39990234375,
+          "repeat_share_train_positive": 0.803723849372385,
+          "repeat_share_any_pair": 0.8480334728033473
+        },
+        "VHALF": {
+          "tune": 0.4899818276220146,
+          "report": 0.47450385964912284,
+          "full": 0.48220847724442567,
+          "submission": 0.5535251322751322,
+          "mean_train_popularity": 3889.400146484375,
+          "repeat_share_train_positive": 0.8076126030873335,
+          "repeat_share_any_pair": 0.8514696553182491
+        },
+        "VTOP5": {
+          "tune": 0.2719535874115779,
+          "report": 0.2699238312862991,
+          "full": 0.27093324478904923,
+          "submission": 0.2958928571428571,
+          "mean_train_popularity": 3889.39990234375,
+          "repeat_share_train_positive": 0.8134395864742623,
+          "repeat_share_any_pair": 0.857032091320267,
+          "report_exact5": 0.2852303120356613,
+          "full_exact5": 0.2854425144747726
+        }
+      },
+      "fit_s": 0.0,
+      "score_s": 0.0,
+      "weights": null,
+      "kind": "pure"
+    },
+    "P-air": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6390072252327359,
+          "report": 0.6314847222222222,
+          "full": 0.6352451899701327,
+          "submission": 0.7417486772486772,
+          "mean_train_popularity": 3889.39990234375,
+          "repeat_share_train_positive": 0.8022087934986456,
+          "repeat_share_any_pair": 0.8465930402167118
+        },
+        "V900": {
+          "tune": 0.5761930020472734,
+          "report": 0.5677617521367522,
+          "full": 0.5719738493723849,
+          "submission": 0.6725731922398589,
+          "mean_train_popularity": 3889.39990234375,
+          "repeat_share_train_positive": 0.803723849372385,
+          "repeat_share_any_pair": 0.8480334728033473
+        },
+        "VHALF": {
+          "tune": 0.49627183045407347,
+          "report": 0.4805564912280702,
+          "full": 0.48837926740443127,
+          "submission": 0.561037037037037,
+          "mean_train_popularity": 3889.400146484375,
+          "repeat_share_train_positive": 0.8076126030873335,
+          "repeat_share_any_pair": 0.8514696553182491
+        },
+        "VTOP5": {
+          "tune": 0.2768139165583947,
+          "report": 0.27482707321717603,
+          "full": 0.2758151458587599,
+          "submission": 0.3013425925925926,
+          "mean_train_popularity": 3889.39990234375,
+          "repeat_share_train_positive": 0.8134395864742623,
+          "repeat_share_any_pair": 0.857032091320267,
+          "report_exact5": 0.29054977711738483,
+          "full_exact5": 0.29078990901571544
+        }
+      },
+      "fit_s": 0.0,
+      "score_s": 0.0,
+      "weights": null,
+      "kind": "pure"
+    },
+    "H": {
+      "metrics": {
+        "V300": {
+          "tune": 0.5773490111620583,
+          "report": 0.5745989583333333,
+          "full": 0.5759736982241671,
+          "submission": 0.6797169312169312,
+          "mean_train_popularity": 2387.426513671875,
+          "repeat_share_train_positive": 0.9836215878307981,
+          "repeat_share_any_pair": 0.9838299645759533
+        },
+        "V900": {
+          "tune": 0.5477014703145356,
+          "report": 0.538837908769974,
+          "full": 0.5432659809390982,
+          "submission": 0.6440626102292768,
+          "mean_train_popularity": 2385.745361328125,
+          "repeat_share_train_positive": 0.9847698744769875,
+          "repeat_share_any_pair": 0.984979079497908
+        },
+        "VHALF": {
+          "tune": 0.45122498347965634,
+          "report": 0.4406498245614036,
+          "full": 0.4459139235450295,
+          "submission": 0.5283002645502646,
+          "mean_train_popularity": 2392.25732421875,
+          "repeat_share_train_positive": 0.9851554239796997,
+          "repeat_share_any_pair": 0.985324592937196
+        },
+        "VTOP5": {
+          "tune": 0.23644783696645977,
+          "report": 0.23612622584023613,
+          "full": 0.23628616555388043,
+          "submission": 0.2613941798941799,
+          "mean_train_popularity": 2401.119384765625,
+          "repeat_share_train_positive": 0.9862588843420202,
+          "repeat_share_any_pair": 0.986388111135042,
+          "report_exact5": 0.24817731550272415,
+          "full_exact5": 0.24750454921422665
+        }
+      },
+      "fit_s": 0.5,
+      "score_s": 0.68,
+      "weights": null,
+      "kind": "pure"
+    },
+    "H2": {
+      "metrics": {
+        "V300": {
+          "tune": 0.5836372794219814,
+          "report": 0.5833969907407408,
+          "full": 0.5835171100460744,
+          "submission": 0.6747910052910053,
+          "mean_train_popularity": 2603.394775390625,
+          "repeat_share_train_positive": 0.9496978537195249,
+          "repeat_share_any_pair": 0.9561575328193374
+        },
+        "V900": {
+          "tune": 0.5394290898939139,
+          "report": 0.5345552303976218,
+          "full": 0.5369901208740121,
+          "submission": 0.6242795414462081,
+          "mean_train_popularity": 2599.7744140625,
+          "repeat_share_train_positive": 0.9514644351464435,
+          "repeat_share_any_pair": 0.9578242677824268
+        },
+        "VHALF": {
+          "tune": 0.517691753988483,
+          "report": 0.5134066666666667,
+          "full": 0.5155396959657902,
+          "submission": 0.5906296296296296,
+          "mean_train_popularity": 2595.10791015625,
+          "repeat_share_train_positive": 0.9548318883484881,
+          "repeat_share_any_pair": 0.9607950941002326
+        },
+        "VTOP5": {
+          "tune": 0.34731858428372075,
+          "report": 0.3482137246501,
+          "full": 0.347768564386053,
+          "submission": 0.3848064373897707,
+          "mean_train_popularity": 2585.654541015625,
+          "repeat_share_train_positive": 0.9603704501399957,
+          "repeat_share_any_pair": 0.9657548998492355,
+          "report_exact5": 0.3695360739640086,
+          "full_exact5": 0.3687270471464019
+        }
+      },
+      "fit_s": 0.03,
+      "score_s": 0.61,
+      "weights": {
+        "H2": 1.0
+      },
+      "kind": "pure"
+    },
+    "MF": {
+      "metrics": {
+        "V300": {
+          "tune": 0.5257869019498865,
+          "report": 0.5199479166666666,
+          "full": 0.5228668009539024,
+          "submission": 0.5726402116402116,
+          "mean_train_popularity": 2675.862548828125,
+          "repeat_share_train_positive": 0.8823504896853511,
+          "repeat_share_any_pair": 0.9356532610960617
+        },
+        "V900": {
+          "tune": 0.45865903592034246,
+          "report": 0.4539826040505389,
+          "full": 0.45631886331938637,
+          "submission": 0.5006111111111111,
+          "mean_train_popularity": 2674.45166015625,
+          "repeat_share_train_positive": 0.883765690376569,
+          "repeat_share_any_pair": 0.9370292887029289
+        },
+        "VHALF": {
+          "tune": 0.35037465779288207,
+          "report": 0.34579520467836256,
+          "full": 0.34807476328093795,
+          "submission": 0.36539285714285713,
+          "mean_train_popularity": 2673.65673828125,
+          "repeat_share_train_positive": 0.8867836751956016,
+          "repeat_share_any_pair": 0.9390568830619581
+        },
+        "VTOP5": {
+          "tune": 0.1532983253933882,
+          "report": 0.1524582262210797,
+          "full": 0.1528760140713619,
+          "submission": 0.14440388007054675,
+          "mean_train_popularity": 2670.645751953125,
+          "repeat_share_train_positive": 0.891104889080336,
+          "repeat_share_any_pair": 0.9425802283006677,
+          "report_exact5": 0.1533102195806505,
+          "full_exact5": 0.15433085194375518
+        }
+      },
+      "fit_s": 3.33,
+      "score_s": 0.82,
+      "weights": {
+        "MF": 1.0
+      },
+      "kind": "pure"
+    },
+    "PPR": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6072861377425779,
+          "report": 0.6028017361111112,
+          "full": 0.6050434697043365,
+          "submission": 0.7132486772486772,
+          "mean_train_popularity": 2558.792724609375,
+          "repeat_share_train_positive": 0.9836215878307981,
+          "repeat_share_any_pair": 0.9838299645759533
+        },
+        "V900": {
+          "tune": 0.5766927228736274,
+          "report": 0.5664640235971757,
+          "full": 0.5715740934449093,
+          "submission": 0.6766895943562611,
+          "mean_train_popularity": 2557.613525390625,
+          "repeat_share_train_positive": 0.9847698744769875,
+          "repeat_share_any_pair": 0.984979079497908
+        },
+        "VHALF": {
+          "tune": 0.4794666289058812,
+          "report": 0.46464619883040936,
+          "full": 0.4720235074363853,
+          "submission": 0.5590145502645503,
+          "mean_train_popularity": 2565.01953125,
+          "repeat_share_train_positive": 0.9851554239796997,
+          "repeat_share_any_pair": 0.985324592937196
+        },
+        "VTOP5": {
+          "tune": 0.2567015543044127,
+          "report": 0.25798129105969725,
+          "full": 0.2573448680211549,
+          "submission": 0.28551124338624345,
+          "mean_train_popularity": 2575.948974609375,
+          "repeat_share_train_positive": 0.9862588843420202,
+          "repeat_share_any_pair": 0.986388111135042,
+          "report_exact5": 0.27208353970612514,
+          "full_exact5": 0.27055748552522746
+        }
+      },
+      "fit_s": 0.09,
+      "score_s": 19.27,
+      "weights": {
+        "PPR": 1.0
+      },
+      "kind": "pure"
+    },
+    "AR": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6439349729053773,
+          "report": 0.636455787037037,
+          "full": 0.6401946007270033,
+          "submission": 0.7424497354497355,
+          "mean_train_popularity": 3805.272216796875,
+          "repeat_share_train_positive": 0.8187122317149406,
+          "repeat_share_any_pair": 0.8599291519066472
+        },
+        "V900": {
+          "tune": 0.5805305462497674,
+          "report": 0.5720857720178373,
+          "full": 0.5763046257554625,
+          "submission": 0.6740414462081129,
+          "mean_train_popularity": 3805.013671875,
+          "repeat_share_train_positive": 0.8203347280334728,
+          "repeat_share_any_pair": 0.8614644351464436
+        },
+        "VHALF": {
+          "tune": 0.5004953743037855,
+          "report": 0.4851269005847954,
+          "full": 0.49277701416790015,
+          "submission": 0.5640608465608465,
+          "mean_train_popularity": 3804.465087890625,
+          "repeat_share_train_positive": 0.8241911609219709,
+          "repeat_share_any_pair": 0.8648340029604568
+        },
+        "VTOP5": {
+          "tune": 0.2834441316587268,
+          "report": 0.2777344568218604,
+          "full": 0.280573922511786,
+          "submission": 0.3050429894179894,
+          "mean_train_popularity": 3803.353271484375,
+          "repeat_share_train_positive": 0.8301959939694163,
+          "repeat_share_any_pair": 0.8705147533922033,
+          "report_exact5": 0.2936156513125309,
+          "full_exact5": 0.295373035566584
+        }
+      },
+      "fit_s": 0.76,
+      "score_s": 2.54,
+      "weights": {
+        "AR": 1.0
+      },
+      "kind": "pure"
+    },
+    "step-4 blend": {
+      "metrics": {
+        "V300": {
+          "tune": 0.7025486313741836,
+          "report": 0.6909166666666667,
+          "full": 0.6967314371049523,
+          "submission": 0.7963862433862433,
+          "mean_train_popularity": 3231.55712890625,
+          "repeat_share_train_positive": 0.9813294436340905,
+          "repeat_share_any_pair": 0.9818712231714941
+        },
+        "V900": {
+          "tune": 0.6538487576772752,
+          "report": 0.6408432041991824,
+          "full": 0.6473405392840539,
+          "submission": 0.748058201058201,
+          "mean_train_popularity": 3231.482421875,
+          "repeat_share_train_positive": 0.9825523012552301,
+          "repeat_share_any_pair": 0.9830125523012553
+        },
+        "VHALF": {
+          "tune": 0.561241621825734,
+          "report": 0.5429046783625732,
+          "full": 0.5520324357980311,
+          "submission": 0.6279900793650793,
+          "mean_train_popularity": 3236.48095703125,
+          "repeat_share_train_positive": 0.9833368576866145,
+          "repeat_share_any_pair": 0.9836751956016071
+        },
+        "VTOP5": {
+          "tune": 0.3216380347432751,
+          "report": 0.3180062839188803,
+          "full": 0.31981238184124244,
+          "submission": 0.3481545414462081,
+          "mean_train_popularity": 3244.08935546875,
+          "repeat_share_train_positive": 0.9847512384234332,
+          "repeat_share_any_pair": 0.9850096920094766,
+          "report_exact5": 0.33587254416377743,
+          "full_exact5": 0.3367617866004963
+        }
+      },
+      "fit_s": 3.68,
+      "score_s": 19.73,
+      "weights": {
+        "P-air": 0.2,
+        "MF4": 0.4,
+        "PPR": 0.4
+      },
+      "kind": "fixed"
+    },
+    "H2+P-air": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6457280811449215,
+          "report": 0.6400152777777777,
+          "full": 0.6428710842536639,
+          "submission": 0.7436653439153438,
+          "mean_train_popularity": 3708.66455078125,
+          "repeat_share_train_positive": 0.8368826838924776,
+          "repeat_share_any_pair": 0.8718899770785581
+        },
+        "V900": {
+          "tune": 0.586317466964452,
+          "report": 0.5787065681902638,
+          "full": 0.5825088331008833,
+          "submission": 0.6814788359788361,
+          "mean_train_popularity": 3708.095703125,
+          "repeat_share_train_positive": 0.8384518828451882,
+          "repeat_share_any_pair": 0.8733472803347281
+        },
+        "VHALF": {
+          "tune": 0.5431530255829321,
+          "report": 0.5383154385964911,
+          "full": 0.5407234909894034,
+          "submission": 0.6209470899470899,
+          "mean_train_popularity": 3297.74658203125,
+          "repeat_share_train_positive": 0.8995136392471982,
+          "repeat_share_any_pair": 0.9193486995136393
+        },
+        "VTOP5": {
+          "tune": 0.3584349886915933,
+          "report": 0.35937577358849854,
+          "full": 0.3589079139445282,
+          "submission": 0.39611882716049385,
+          "mean_train_popularity": 2956.66845703125,
+          "repeat_share_train_positive": 0.939263407279776,
+          "repeat_share_any_pair": 0.9495584751238424,
+          "report_exact5": 0.38171041769853065,
+          "full_exact5": 0.38071712158808935
+        }
+      },
+      "fit_s": 0.03,
+      "score_s": 0.86,
+      "weights": {
+        "V300": {
+          "H2": 0.3
+        },
+        "V900": {
+          "H2": 0.3
+        },
+        "VHALF": {
+          "H2": 0.6
+        },
+        "VTOP5": {
+          "H2": 0.8
+        }
+      },
+      "kind": "hybrid"
+    },
+    "H2+P-air [shared w]": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6386915844564864,
+          "report": 0.6384114583333333,
+          "full": 0.638551492209025,
+          "submission": 0.7377063492063493,
+          "mean_train_popularity": 3434.9033203125,
+          "repeat_share_train_positive": 0.8780996040841842,
+          "repeat_share_any_pair": 0.9028547614086267
+        },
+        "V900": {
+          "tune": 0.5834222036106458,
+          "report": 0.581374605165366,
+          "full": 0.5823975476522548,
+          "submission": 0.6768130511463846,
+          "mean_train_popularity": 3434.04541015625,
+          "repeat_share_train_positive": 0.8796652719665272,
+          "repeat_share_any_pair": 0.9043096234309623
+        },
+        "VHALF": {
+          "tune": 0.5429410931747382,
+          "report": 0.5344873684210526,
+          "full": 0.5386954606329738,
+          "submission": 0.6170423280423281,
+          "mean_train_popularity": 3433.2890625,
+          "repeat_share_train_positive": 0.8831042503700571,
+          "repeat_share_any_pair": 0.9072108268132798
+        },
+        "VTOP5": {
+          "tune": 0.34888227226793705,
+          "report": 0.3463997191278682,
+          "full": 0.3476343121066361,
+          "submission": 0.38060361552028216,
+          "mean_train_popularity": 3431.84033203125,
+          "repeat_share_train_positive": 0.8884772776222271,
+          "repeat_share_any_pair": 0.9121688563428818,
+          "report_exact5": 0.36732210665345877,
+          "full_exact5": 0.3672531017369727
+        }
+      },
+      "fit_s": 0.03,
+      "score_s": 1.53,
+      "weights": {
+        "H2": 0.5
+      },
+      "kind": "shared"
+    },
+    "H2+PPR": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6273746005279978,
+          "report": 0.6241111111111112,
+          "full": 0.6257425158019032,
+          "submission": 0.7320396825396825,
+          "mean_train_popularity": 2598.547119140625,
+          "repeat_share_train_positive": 0.9836215878307981,
+          "repeat_share_any_pair": 0.9838299645759533
+        },
+        "V900": {
+          "tune": 0.594250651405174,
+          "report": 0.5836181949089557,
+          "full": 0.5889299744304974,
+          "submission": 0.6945220458553791,
+          "mean_train_popularity": 2599.213623046875,
+          "repeat_share_train_positive": 0.9847698744769875,
+          "repeat_share_any_pair": 0.984979079497908
+        },
+        "VHALF": {
+          "tune": 0.5312559001227226,
+          "report": 0.5229360233918129,
+          "full": 0.5270774887808087,
+          "submission": 0.6115723104056437,
+          "mean_train_popularity": 2595.268798828125,
+          "repeat_share_train_positive": 0.9832945654472405,
+          "repeat_share_any_pair": 0.9837174878409812
+        },
+        "VTOP5": {
+          "tune": 0.34731858428372075,
+          "report": 0.3482137246501,
+          "full": 0.347768564386053,
+          "submission": 0.3848064373897707,
+          "mean_train_popularity": 2585.654541015625,
+          "repeat_share_train_positive": 0.9603704501399957,
+          "repeat_share_any_pair": 0.9657548998492355,
+          "report_exact5": 0.3695360739640086,
+          "full_exact5": 0.3687270471464019
+        }
+      },
+      "fit_s": 0.12,
+      "score_s": 20.75,
+      "weights": {
+        "V300": {
+          "H2": 0.3,
+          "PPR": 0.7
+        },
+        "V900": {
+          "H2": 0.2,
+          "PPR": 0.8
+        },
+        "VHALF": {
+          "H2": 0.5,
+          "PPR": 0.5
+        },
+        "VTOP5": {
+          "H2": 1.0,
+          "PPR": 0.0
+        }
+      },
+      "kind": "hybrid"
+    },
+    "H2+PPR [shared w]": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6238988467416979,
+          "report": 0.6214565972222222,
+          "full": 0.6226774675279573,
+          "submission": 0.7295,
+          "mean_train_popularity": 2595.42333984375,
+          "repeat_share_train_positive": 0.9832465096895187,
+          "repeat_share_any_pair": 0.9834965617837049
+        },
+        "V900": {
+          "tune": 0.5881068537130094,
+          "report": 0.579019997212932,
+          "full": 0.5835596234309623,
+          "submission": 0.6864726631393298,
+          "mean_train_popularity": 2593.705810546875,
+          "repeat_share_train_positive": 0.9843933054393306,
+          "repeat_share_any_pair": 0.9846443514644352
+        },
+        "VHALF": {
+          "tune": 0.5308204710657981,
+          "report": 0.5195967251461988,
+          "full": 0.5251836775451705,
+          "submission": 0.6120630511463844,
+          "mean_train_popularity": 2599.443359375,
+          "repeat_share_train_positive": 0.9847747938253331,
+          "repeat_share_any_pair": 0.9849862550222034
+        },
+        "VTOP5": {
+          "tune": 0.3339113854001251,
+          "report": 0.33409513948395697,
+          "full": 0.33400375714935265,
+          "submission": 0.3706175044091711,
+          "mean_train_popularity": 2606.79638671875,
+          "repeat_share_train_positive": 0.9860004307559768,
+          "repeat_share_any_pair": 0.9861727331466724,
+          "report_exact5": 0.3543057619283474,
+          "full_exact5": 0.35374524400330853
+        }
+      },
+      "fit_s": 0.12,
+      "score_s": 48.96,
+      "weights": {
+        "H2": 0.4,
+        "PPR": 0.6
+      },
+      "kind": "shared"
+    },
+    "H2+AR": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6536010374693159,
+          "report": 0.6519097222222222,
+          "full": 0.652755203630386,
+          "submission": 0.753010582010582,
+          "mean_train_popularity": 3707.05419921875,
+          "repeat_share_train_positive": 0.8370493852886018,
+          "repeat_share_any_pair": 0.8730152115023964
+        },
+        "V900": {
+          "tune": 0.5949462590731435,
+          "report": 0.5921398875882572,
+          "full": 0.5935418991166899,
+          "submission": 0.6868245149911817,
+          "mean_train_popularity": 3588.3916015625,
+          "repeat_share_train_positive": 0.8589121338912133,
+          "repeat_share_any_pair": 0.8892468619246862
+        },
+        "VHALF": {
+          "tune": 0.5457535636741243,
+          "report": 0.5398520467836257,
+          "full": 0.5427897018397124,
+          "submission": 0.6168425925925927,
+          "mean_train_popularity": 3329.28173828125,
+          "repeat_share_train_positive": 0.8998942694015648,
+          "repeat_share_any_pair": 0.9193909917530133
+        },
+        "VTOP5": {
+          "tune": 0.3608173331408498,
+          "report": 0.35868406645720274,
+          "full": 0.35974495656543903,
+          "submission": 0.3940696649029982,
+          "mean_train_popularity": 3058.67626953125,
+          "repeat_share_train_positive": 0.9334482015937972,
+          "repeat_share_any_pair": 0.9448632349773853,
+          "report_exact5": 0.3809905894006934,
+          "full_exact5": 0.3811869313482217
+        }
+      },
+      "fit_s": 0.79,
+      "score_s": 4.09,
+      "weights": {
+        "V300": {
+          "H2": 0.1,
+          "AR": 0.9
+        },
+        "V900": {
+          "H2": 0.2,
+          "AR": 0.8
+        },
+        "VHALF": {
+          "H2": 0.4,
+          "AR": 0.6
+        },
+        "VTOP5": {
+          "H2": 0.6,
+          "AR": 0.4
+        }
+      },
+      "kind": "hybrid"
+    },
+    "H2+AR [shared w]": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6484333750173683,
+          "report": 0.6466076388888888,
+          "full": 0.6475203167326526,
+          "submission": 0.7440925925925926,
+          "mean_train_popularity": 3461.562255859375,
+          "repeat_share_train_positive": 0.877057720358408,
+          "repeat_share_any_pair": 0.9023546572202542
+        },
+        "V900": {
+          "tune": 0.5930208914945095,
+          "report": 0.5894234253065774,
+          "full": 0.5912206531845653,
+          "submission": 0.6852151675485009,
+          "mean_train_popularity": 3460.57763671875,
+          "repeat_share_train_positive": 0.878744769874477,
+          "repeat_share_any_pair": 0.9039330543933054
+        },
+        "VHALF": {
+          "tune": 0.5441991173416407,
+          "report": 0.5369348538011697,
+          "full": 0.5405508564178474,
+          "submission": 0.6183082010582011,
+          "mean_train_popularity": 3458.04296875,
+          "repeat_share_train_positive": 0.8825544512581941,
+          "repeat_share_any_pair": 0.9070839500951575
+        },
+        "VTOP5": {
+          "tune": 0.34962838650690536,
+          "report": 0.3477988431876607,
+          "full": 0.3487086893052863,
+          "submission": 0.37846582892416225,
+          "mean_train_popularity": 3454.39892578125,
+          "repeat_share_train_positive": 0.888520353219901,
+          "repeat_share_any_pair": 0.9125134611242731,
+          "report_exact5": 0.368045236915965,
+          "full_exact5": 0.3683564929693962
+        }
+      },
+      "fit_s": 0.79,
+      "score_s": 3.96,
+      "weights": {
+        "H2": 0.3,
+        "AR": 0.7
+      },
+      "kind": "shared"
+    },
+    "H2+MF": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6154401139363623,
+          "report": 0.6187172453703704,
+          "full": 0.6170790210923571,
+          "submission": 0.6991772486772486,
+          "mean_train_popularity": 2803.177978515625,
+          "repeat_share_train_positive": 0.9364867680766826,
+          "repeat_share_any_pair": 0.9574077932902688
+        },
+        "V900": {
+          "tune": 0.5657621440536014,
+          "report": 0.5645702108881457,
+          "full": 0.5651656787540679,
+          "submission": 0.6485229276895944,
+          "mean_train_popularity": 2777.24365234375,
+          "repeat_share_train_positive": 0.9444351464435147,
+          "repeat_share_any_pair": 0.960794979079498
+        },
+        "VHALF": {
+          "tune": 0.5312281695459264,
+          "report": 0.5293111111111112,
+          "full": 0.5302653838020723,
+          "submission": 0.6010943562610229,
+          "mean_train_popularity": 2741.13427734375,
+          "repeat_share_train_positive": 0.9532247832522732,
+          "repeat_share_any_pair": 0.9654472404313809
+        },
+        "VTOP5": {
+          "tune": 0.3513671141908474,
+          "report": 0.35263781776635245,
+          "full": 0.3520058869983487,
+          "submission": 0.38912169312169315,
+          "mean_train_popularity": 2682.879638671875,
+          "repeat_share_train_positive": 0.9619642472539306,
+          "repeat_share_any_pair": 0.9704932155933663,
+          "report_exact5": 0.37456166419019316,
+          "full_exact5": 0.37327874276261364
+        }
+      },
+      "fit_s": 3.36,
+      "score_s": 1.46,
+      "weights": {
+        "V300": {
+          "H2": 0.5,
+          "MF": 0.5
+        },
+        "V900": {
+          "H2": 0.6,
+          "MF": 0.4
+        },
+        "VHALF": {
+          "H2": 0.7,
+          "MF": 0.3
+        },
+        "VTOP5": {
+          "H2": 0.8,
+          "MF": 0.2
+        }
+      },
+      "kind": "hybrid"
+    },
+    "H2+MF [shared w]": {
+      "metrics": {
+        "V300": {
+          "tune": 0.6117465610671112,
+          "report": 0.614113888888889,
+          "full": 0.6129304716260332,
+          "submission": 0.7019232804232804,
+          "mean_train_popularity": 2744.567138671875,
+          "repeat_share_train_positive": 0.9488226713898729,
+          "repeat_share_any_pair": 0.9617837049385288
+        },
+        "V900": {
+          "tune": 0.564145495998511,
+          "report": 0.5631121098104793,
+          "full": 0.5636283705253371,
+          "submission": 0.650279541446208,
+          "mean_train_popularity": 2741.7080078125,
+          "repeat_share_train_positive": 0.950418410041841,
+          "repeat_share_any_pair": 0.9633054393305439
+        },
+        "VHALF": {
+          "tune": 0.5312281695459264,
+          "report": 0.5293111111111112,
+          "full": 0.5302653838020723,
+          "submission": 0.6010943562610229,
+          "mean_train_popularity": 2741.13427734375,
+          "repeat_share_train_positive": 0.9532247832522732,
+          "repeat_share_any_pair": 0.9654472404313809
+        },
+        "VTOP5": {
+          "tune": 0.34922320870025503,
+          "report": 0.3516829715319433,
+          "full": 0.35045971235073115,
+          "submission": 0.3845522486772487,
+          "mean_train_popularity": 2737.806884765625,
+          "repeat_share_train_positive": 0.957570536291191,
+          "repeat_share_any_pair": 0.9690286452724531,
+          "report_exact5": 0.3731104507181773,
+          "full_exact5": 0.3712630272952854
+        }
+      },
+      "fit_s": 3.36,
+      "score_s": 1.34,
+      "weights": {
+        "H2": 0.7,
+        "MF": 0.3
+      },
+      "kind": "shared"
+    },
+    "P-air+MF+PPR+H2": {
+      "metrics": {
+        "V300": {
+          "tune": 0.7028827983882172,
+          "report": 0.6920569444444443,
+          "full": 0.6974687434882267,
+          "submission": 0.7976455026455026,
+          "mean_train_popularity": 3349.96533203125,
+          "repeat_share_train_positive": 0.9782037924567618,
+          "repeat_share_any_pair": 0.98012085851219
+        },
+        "V900": {
+          "tune": 0.6536588032756374,
+          "report": 0.6394999535488666,
+          "full": 0.6465734542073455,
+          "submission": 0.7472283950617283,
+          "mean_train_popularity": 3195.5634765625,
+          "repeat_share_train_positive": 0.982092050209205,
+          "repeat_share_any_pair": 0.9829707112970711
+        },
+        "VHALF": {
+          "tune": 0.572902388369678,
+          "report": 0.5566009356725146,
+          "full": 0.5647154672117667,
+          "submission": 0.6418955026455027,
+          "mean_train_popularity": 3304.25341796875,
+          "repeat_share_train_positive": 0.974032565024318,
+          "repeat_share_any_pair": 0.9765700993867625
+        },
+        "VTOP5": {
+          "tune": 0.3658406717674799,
+          "report": 0.3630199704846234,
+          "full": 0.3644227271639505,
+          "submission": 0.39906613756613757,
+          "mean_train_popularity": 3095.788818359375,
+          "repeat_share_train_positive": 0.9636441955632135,
+          "repeat_share_any_pair": 0.9693732500538444,
+          "report_exact5": 0.38548291233283805,
+          "full_exact5": 0.3862646815550041
+        }
+      },
+      "fit_s": 3.45,
+      "score_s": 20.12,
+      "weights": {
+        "V300": {
+          "MF": 0.3,
+          "PPR": 0.4,
+          "H2": 0.0
+        },
+        "V900": {
+          "MF": 0.3,
+          "PPR": 0.4,
+          "H2": 0.1
+        },
+        "VHALF": {
+          "MF": 0.2,
+          "PPR": 0.3,
+          "H2": 0.2
+        },
+        "VTOP5": {
+          "MF": 0.2,
+          "PPR": 0.1,
+          "H2": 0.5
+        }
+      },
+      "kind": "hybrid"
+    },
+    "P-air+MF+PPR+H2 [shared w]": {
+      "metrics": {
+        "V300": {
+          "tune": 0.700548260849428,
+          "report": 0.6895048611111111,
+          "full": 0.6950254103864231,
+          "submission": 0.7949973544973544,
+          "mean_train_popularity": 3195.861083984375,
+          "repeat_share_train_positive": 0.9808710147947489,
+          "repeat_share_any_pair": 0.981829547822463
+        },
+        "V900": {
+          "tune": 0.6536588032756374,
+          "report": 0.6394999535488666,
+          "full": 0.6465734542073455,
+          "submission": 0.7472283950617283,
+          "mean_train_popularity": 3195.5634765625,
+          "repeat_share_train_positive": 0.982092050209205,
+          "repeat_share_any_pair": 0.9829707112970711
+        },
+        "VHALF": {
+          "tune": 0.5705564995751912,
+          "report": 0.5505087719298246,
+          "full": 0.5604881229294424,
+          "submission": 0.6395171957671958,
+          "mean_train_popularity": 3200.562744140625,
+          "repeat_share_train_positive": 0.9828293508141256,
+          "repeat_share_any_pair": 0.9836329033622331
+        },
+        "VTOP5": {
+          "tune": 0.3393854963668736,
+          "report": 0.33446074930972103,
+          "full": 0.3369098643118673,
+          "submission": 0.37004563492063497,
+          "mean_train_popularity": 3207.325927734375,
+          "repeat_share_train_positive": 0.9841481800559982,
+          "repeat_share_any_pair": 0.9848804652164549,
+          "report_exact5": 0.35420009905894007,
+          "full_exact5": 0.3551555004135649
+        }
+      },
+      "fit_s": 3.45,
+      "score_s": 20.15,
+      "weights": {
+        "MF": 0.3,
+        "PPR": 0.4,
+        "H2": 0.1
+      },
+      "kind": "shared"
+    },
+    "H2-first + step-4 blend": {
+      "metrics": {
+        "V300": {
+          "tune": 0.7025486313741836,
+          "report": 0.6909166666666667,
+          "full": 0.6967314371049523,
+          "submission": 0.7963862433862433,
+          "mean_train_popularity": 3231.55712890625,
+          "repeat_share_train_positive": 0.9813294436340905,
+          "repeat_share_any_pair": 0.9818712231714941
+        },
+        "V900": {
+          "tune": 0.6538487576772752,
+          "report": 0.6408432041991824,
+          "full": 0.6473405392840539,
+          "submission": 0.748058201058201,
+          "mean_train_popularity": 3231.482421875,
+          "repeat_share_train_positive": 0.9825523012552301,
+          "repeat_share_any_pair": 0.9830125523012553
+        },
+        "VHALF": {
+          "tune": 0.561241621825734,
+          "report": 0.5429046783625732,
+          "full": 0.5520324357980311,
+          "submission": 0.6279900793650793,
+          "mean_train_popularity": 3236.48095703125,
+          "repeat_share_train_positive": 0.9833368576866145,
+          "repeat_share_any_pair": 0.9836751956016071
+        },
+        "VTOP5": {
+          "tune": 0.34935193205331794,
+          "report": 0.3450867609254499,
+          "full": 0.3472078636896643,
+          "submission": 0.38207694003527337,
+          "mean_train_popularity": 2942.813232421875,
+          "repeat_share_train_positive": 0.9847081628257592,
+          "repeat_share_any_pair": 0.9851389188024984,
+          "report_exact5": 0.3658263166584117,
+          "full_exact5": 0.36746898263027294
+        }
+      },
+      "fit_s": 3.71,
+      "score_s": 20.24,
+      "weights": {
+        "V300": {
+          "n_H2_first": 0,
+          "MF4": 0.4,
+          "PPR": 0.4
+        },
+        "V900": {
+          "n_H2_first": 0,
+          "MF4": 0.4,
+          "PPR": 0.4
+        },
+        "VHALF": {
+          "n_H2_first": 0,
+          "MF4": 0.4,
+          "PPR": 0.4
+        },
+        "VTOP5": {
+          "n_H2_first": 3,
+          "MF4": 0.4,
+          "PPR": 0.4
+        }
+      },
+      "kind": "hybrid"
+    },
+    "H2-first + step-4 blend [shared w]": {
+      "metrics": {
+        "V300": {
+          "tune": 0.7025486313741836,
+          "report": 0.6909166666666667,
+          "full": 0.6967314371049523,
+          "submission": 0.7963862433862433,
+          "mean_train_popularity": 3231.55712890625,
+          "repeat_share_train_positive": 0.9813294436340905,
+          "repeat_share_any_pair": 0.9818712231714941
+        },
+        "V900": {
+          "tune": 0.6538487576772752,
+          "report": 0.6408432041991824,
+          "full": 0.6473405392840539,
+          "submission": 0.748058201058201,
+          "mean_train_popularity": 3231.482421875,
+          "repeat_share_train_positive": 0.9825523012552301,
+          "repeat_share_any_pair": 0.9830125523012553
+        },
+        "VHALF": {
+          "tune": 0.561241621825734,
+          "report": 0.5429046783625732,
+          "full": 0.5520324357980311,
+          "submission": 0.6279900793650793,
+          "mean_train_popularity": 3236.48095703125,
+          "repeat_share_train_positive": 0.9833368576866145,
+          "repeat_share_any_pair": 0.9836751956016071
+        },
+        "VTOP5": {
+          "tune": 0.3216380347432751,
+          "report": 0.3180062839188803,
+          "full": 0.31981238184124244,
+          "submission": 0.3481545414462081,
+          "mean_train_popularity": 3244.08935546875,
+          "repeat_share_train_positive": 0.9847512384234332,
+          "repeat_share_any_pair": 0.9850096920094766,
+          "report_exact5": 0.33587254416377743,
+          "full_exact5": 0.3367617866004963
+        }
+      },
+      "fit_s": 3.71,
+      "score_s": 20.25,
+      "weights": {
+        "n_H2_first": 0,
+        "MF4": 0.4,
+        "PPR": 0.4
+      },
+      "kind": "shared"
+    }
+  },
+  "tune_curves_best": {
+    "H2+P-air": {
+      "best_per_variant": [
+        0.6457280811449215,
+        0.586317466964452,
+        0.5431530255829321,
+        0.3584349886915933
+      ],
+      "best_mean": 0.5284842883774519
+    },
+    "H2+PPR": {
+      "best_per_variant": [
+        0.6273746005279978,
+        0.594250651405174,
+        0.5312559001227226,
+        0.34731858428372075
+      ],
+      "best_mean": 0.5191843892301576
+    },
+    "H2+AR": {
+      "best_per_variant": [
+        0.6536010374693159,
+        0.5949462590731435,
+        0.5457535636741243,
+        0.3608173331408498
+      ],
+      "best_mean": 0.533820442590106
+    },
+    "H2+MF": {
+      "best_per_variant": [
+        0.6154401139363623,
+        0.5657621440536014,
+        0.5312281695459264,
+        0.3513671141908474
+      ],
+      "best_mean": 0.5140858588279509
+    },
+    "P-air+MF+PPR+H2": {
+      "best_per_variant": [
+        0.7028827983882172,
+        0.6536588032756374,
+        0.572902388369678,
+        0.3658406717674799
+      ],
+      "best_mean": 0.5660372650167825
+    },
+    "H2-first + step-4 blend": {
+      "best_per_variant": [
+        0.7025486313741836,
+        0.6538487576772752,
+        0.561241621825734,
+        0.34935193205331794
+      ],
+      "best_mean": 0.559819261405117
+    }
+  }
+}
