@@ -27,9 +27,10 @@ All numbers are copied from the step reports in outputs/ (no recomputation). REP
 | submission_P.csv | P (global popularity) | 0.28234 | 0.27809 | 0.2699 |
 | submission_FINAL_vtop5.csv | P-air + MF + PPR + H2 blend, weights tuned on VTOP5 | 0.41541 | 0.40202 | 0.3630 |
 | submission_STEP7.csv | step-7 reranker (LightGBM, fit on TUNE users) | 0.42744 | 0.41984 | 0.4047 |
-| submission_STEP7_all.csv | step-7 reranker refit on all validation users (FINAL) | 0.42914 | 0.42244 | not scorable (no held-out users); same recipe on TUNE-fit folds: 0.4047 / 0.4065 |
+| submission_STEP7_all.csv | step-7 reranker refit on all validation users (previous final) | 0.42914 | 0.42244 | not scorable (no held-out users); same recipe on TUNE-fit folds: 0.4047 / 0.4065 |
+| submission_STEP15.csv | per-week reranker, fit on weeks 11-20 features, inference window weeks 11-30 (FINAL) | 0.44903 | 0.44125 | not scorable (no held-out users); validation analogue (fit on weeks 16-20, folds A / B): infer 16-20 0.3937 / 0.3941, infer 11-20 0.4006 / 0.4002 |
 
-The three files that have a validation VTOP5 are ordered the same on validation, Kaggle public and Kaggle private (P < FINAL_vtop5 < STEP7). Kaggle private minus validation VTOP5 (REPORT): submission_P.csv +0.0082, submission_FINAL_vtop5.csv +0.0390, submission_STEP7.csv +0.0151. This agreement was observed after the fact; no weight or hyperparameter was chosen from a Kaggle number.
+The three files that have a validation VTOP5 are ordered the same on validation, Kaggle public and Kaggle private (P < FINAL_vtop5 < STEP7). Kaggle private minus validation VTOP5 (REPORT): submission_P.csv +0.0082, submission_FINAL_vtop5.csv +0.0390, submission_STEP7.csv +0.0151. submission_STEP7_all.csv and submission_STEP15.csv have no validation score of their own. The step-15 analogue (b) - (a) was +0.0065 VTOP5 on validation; STEP15 scored +0.01881 private vs STEP7_all. This agreement was observed after the fact; no weight, hyperparameter or branch was chosen from a Kaggle number.
 
 ## (c) Final hyperparameters per method
 
@@ -67,6 +68,7 @@ The three files that have a validation VTOP5 are ordered the same on validation,
 | repeat rate (validation positives that were also TRAIN positives for the same user) | 0.211 |
 | cold start in validation (no TRAIN positive): users with truth / submission users | 56 / 10 |
 | final file STEP7_all: submission users without data in weeks 21-30, per component (popularity fallback) | {'H2': 23, 'PPR': 14, 'MF': 14, 'AR': 14, 'EW': 14} |
+| final file STEP15: submission users without data in weeks 11-30, per component (popularity fallback) | {'H2': 5, 'PPR': 2, 'MF': 2, 'AR': 2, 'EW': 1} |
 | VTOP5 truth: users / positive pairs / users with exactly 5 truth items | 4,643 / 21,689 / 4,030 |
 
 ## (e) Improvement attempts after step 7 (2-fold swap, mean VTOP5 over the two folds; step-7 reranker = 0.4056)
@@ -81,6 +83,10 @@ The three files that have a validation VTOP5 are ordered the same on validation,
 | 8b | bagged (w=0) | 0.4052 | -0.0003 | no |
 | 8b | bagged + step-6 fusion (w chosen out-of-bag) | 0.4050 | -0.0006 | no |
 | 10 | step-7 + multi-scale recency features | 0.4024 | -0.0031 | no |
+| 15 | analogue (a): fit on weeks 16-20, infer with weeks 16-20 (5-week fit, not comparable with the 10-week rows) | 0.3939 | -0.0117 | no |
+| 15 | analogue (b): fit on weeks 16-20, infer with weeks 11-20 (longer inference window) | 0.4004 | -0.0052 | window rule applied to the final run (STEP15) |
+
+Step 15: (b) - (a) pooled over both folds +0.0065, paired bootstrap 95% CI [+0.0036, +0.0094]; users without H2 data 213 in (a) vs 108 in (b). The step-15 rows are measured against a 5-week fit, so the column 'change vs step 7' is not the relevant comparison; (b) - (a) is.
 
 Step 8 pooled bootstrap of the full new reranker vs step 7 on VTOP5: -0.0049 [-0.0071, -0.0027]. Step 10 H2 decay grid (c in 0.5/0.3/0.2/0.1 x T in 60/30/14 days): chosen c = 0.5, T = 60, i.e. unchanged.
 
@@ -93,3 +99,4 @@ Step-10 learning curve (step-7 features, VTOP5 on the other fold; users in the t
 | 100% (2309 / 2334 users) | 0.4047 | 0.4065 |
 
 100% > 50% in both folds, so by the pre-declared rule the final model was refit on all validation users (step 11, `submission_STEP7_all.csv`).
+Step 15 rule satisfied (b beats a in both folds, pooled CI excludes zero): the final file is `submission_STEP15.csv` (per-week reranker fit on weeks 11-20 features, inference features from weeks 11-30).

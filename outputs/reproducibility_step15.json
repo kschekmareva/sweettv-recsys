@@ -1,0 +1,5 @@
+{"command": "python src/make_final.py --step15 --rebuild --out outputs/submissions/repro_STEP15.csv",
+ "sha256_submission_STEP15": "0da5664ced2867c396abe7f0a10ee0138588e00ebb40e471536406c177c3015e",
+ "sha256_repro_STEP15": "0da5664ced2867c396abe7f0a10ee0138588e00ebb40e471536406c177c3015e",
+ "identical_rows_share": 1.0, "rows": 1261, "fitted_users": 4643, "trees": 142, "make_final_seconds_with_rebuild": 230.0,
+ "note": "the repro file was deleted after the comparison"}

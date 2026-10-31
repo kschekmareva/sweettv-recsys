@@ -21,6 +21,8 @@ Runtimes copied from the step reports (seconds, wall clock on this machine):
 | 8b seed bagging, rank fusion (src/run_step8b.py) | 180.4 |
 | 10 (8c) H2 decay grid, multi-scale features, learning curve (src/run_step10.py) | 137.4 |
 | 11 final refit on all validation users (src/run_step11.py) | 160.7 |
+| 15 per-week reranker, short-window analogue and final file (src/run_step15.py) | 247.9 |
+| 16 reproduction of submission_STEP15.csv, with cache rebuild (src/make_final.py --step15 --rebuild) | 230.0 |
 | 9 reproduction of the final file, with cache rebuild (src/make_final.py --rebuild) | 185.4 |
 
 The join cache (outputs/cache/interactions_v3.pkl) is rebuilt from ./data in about 80 s; later steps reuse it.

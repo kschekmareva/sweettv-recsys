@@ -2,7 +2,7 @@
 
 All files: candidate pool = labelled programmes airing in weeks 31-42, 5 distinct ids per user, template format. History used: viewing weeks 11-30 for the steps 3-6 files; the reranker files (`submission_STEP7.csv`, `submission_STEP7_all.csv`) take their features from weeks 21-30 (same window length as in training) and the 31-42 schedule. Kaggle columns filled by the project owner; files marked "not submitted" were never uploaded.
 
-**Final submission (FINAL) = `submission_STEP7_all.csv`** (public 0.42914, private 0.42244).
+**Final submission (FINAL) = `submission_STEP15.csv`** (public 0.44903, private 0.44125). Previous final: `submission_STEP7_all.csv` (0.42914 / 0.42244).
 
 | file | method | weights / hyperparameters | Kaggle public | Kaggle private |
 |---|---|---|---|---|
@@ -17,5 +17,5 @@ All files: candidate pool = labelled programmes airing in weeks 31-42, 5 distinc
 | submission_CHOSEN_step5.csv | step 5: P-air + MF + PPR + H2, shared weights | MF 0.3, PPR 0.4, H2 0.1, P-air 0.2; MF alpha 0.3, PPR alpha 0.3, H2 c 0.5 | not submitted | not submitted |
 | submission_FINAL_vtop5.csv | step 6: P-air + MF + PPR + H2, weights tuned on VTOP5 | MF 0.2, PPR 0.1, H2 0.5, P-air 0.2; MF alpha 0.3, PPR alpha 0.3, H2 c 0.5 | 0.41541 | 0.40202 |
 | submission_STEP7.csv | step 7: LightGBM reranker (lambdarank) over top-50 union of H2, EW, PPR, MF, AR, P-air | fitted on TUNE users (weeks 11-20 features, weeks 21-30 VTOP5 labels), best iteration 174; applied to features from weeks 21-30; EW m 10, c 0.5 | 0.42744 | 0.41984 |
-| submission_STEP7_all.csv | step 11 (FINAL): step-7 reranker refit on ALL validation users (learning-curve rule), LightGBM lambdarank | step-7 features and settings, seed 42, 142 trees (mean best iteration of the two folds: 174 and 110); features from weeks 21-30 + 31-42 schedule; cannot be scored on validation | 0.42914 | 0.42244 |
-| submission_STEP15.csv | step 15: per-week reranker (step-7 features divided by window weeks), fit on weeks 11-20 features; branch 'long_window' | 142 trees, all validation users; inference window 20 weeks, target 12 weeks; cannot be scored on validation | not submitted | not submitted |
+| submission_STEP7_all.csv | step 11 (previous final): step-7 reranker refit on ALL validation users (learning-curve rule), LightGBM lambdarank | step-7 features and settings, seed 42, 142 trees (mean best iteration of the two folds: 174 and 110); features from weeks 21-30 + 31-42 schedule; cannot be scored on validation | 0.42914 | 0.42244 |
+| submission_STEP15.csv | step 15 (FINAL): per-week reranker (step-7 features divided by window weeks), fit on weeks 11-20 features; branch 'long_window' | 142 trees, all validation users; inference window 20 weeks, target 12 weeks; cannot be scored on validation | 0.44903 | 0.44125 |

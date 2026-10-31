@@ -21,6 +21,7 @@ KAGGLE = {  # provided by the project owner (public, private)
     "submission_FINAL_vtop5.csv": ("0.41541", "0.40202"),
     "submission_STEP7.csv": ("0.42744", "0.41984"),
     "submission_STEP7_all.csv": ("0.42914", "0.42244"),
+    "submission_STEP15.csv": ("0.44903", "0.44125"),
 }
 
 
@@ -58,6 +59,11 @@ def runtimes():
     rt.append(("8b seed bagging, rank fusion (src/run_step8b.py)", L("validation_step8b.json")["runtime_s"]))
     rt.append(("10 (8c) H2 decay grid, multi-scale features, learning curve (src/run_step10.py)", L("validation_step10.json")["runtime_s"]))
     rt.append(("11 final refit on all validation users (src/run_step11.py)", L("validation_step11.json")["runtime_s"]))
+    if (OUT / "validation_step15.json").exists():
+        rt.append(("15 per-week reranker, short-window analogue and final file (src/run_step15.py)", L("validation_step15.json")["runtime_s"]))
+    rep15 = OUT / "reproducibility_step15.json"
+    if rep15.exists():
+        rt.append(("16 reproduction of submission_STEP15.csv, with cache rebuild (src/make_final.py --step15 --rebuild)", json.loads(rep15.read_text(encoding="utf-8"))["make_final_seconds_with_rebuild"]))
     rep = OUT / "reproducibility.json"
     if rep.exists():
         r = json.loads(rep.read_text(encoding="utf-8"))
@@ -109,6 +115,7 @@ def method_rows():
 def write_tables():
     J2, J3, J5, J6, J7 = L("validation_step2.json"), L("validation_step3.json"), L("validation_step5.json"), L("validation_step6.json"), L("validation_step7.json")
     J8, J8b, J10, J11, E = L("validation_step8.json"), L("validation_step8b.json"), L("validation_step10.json"), L("validation_step11.json"), L("eda.json")
+    J15 = L("validation_step15.json")
     rows = method_rows()
     (OUT / "report_tables.csv").write_text("method,source,VTOP5_REPORT,V300_REPORT\n" + "\n".join(
         f'"{m}","{s}",{"" if a is None else f"{a:.4f}"},{"" if b is None else f"{b:.4f}"}' for m, s, a, b in rows) + "\n", encoding="utf-8")
@@ -120,14 +127,22 @@ def write_tables():
     pv = {"submission_P.csv": ("P (global popularity)", J5["rows"]["P"]["metrics"]["VTOP5"]["report"]),
           "submission_FINAL_vtop5.csv": ("P-air + MF + PPR + H2 blend, weights tuned on VTOP5", J6["rows"]["step-6 FINAL (VTOP5-tuned w)"]["VTOP5"]["report"]),
           "submission_STEP7.csv": ("step-7 reranker (LightGBM, fit on TUNE users)", J7["rows"]["reranker"]["VTOP5"]["report"]),
-          "submission_STEP7_all.csv": ("step-7 reranker refit on all validation users (FINAL)", None)}
+          "submission_STEP7_all.csv": ("step-7 reranker refit on all validation users (previous final)", None),
+          "submission_STEP15.csv": ("per-week reranker, fit on weeks 11-20 features, inference window weeks 11-30 (FINAL)", None)}
+    ana = {f: J15["table"][f] for f in ("A", "B")}
+    no_val = {"submission_STEP7_all.csv": "not scorable (no held-out users); same recipe on TUNE-fit folds: " + f4(J11['fold_vtop5_reproduced']['A']) + " / " + f4(J11['fold_vtop5_reproduced']['B']),
+              "submission_STEP15.csv": "not scorable (no held-out users); validation analogue (fit on weeks 16-20, folds A / B): infer 16-20 "
+                                       + f4(ana["A"]["a_5w_fit_5w_infer"]["VTOP5"]) + " / " + f4(ana["B"]["a_5w_fit_5w_infer"]["VTOP5"]) + ", infer 11-20 "
+                                       + f4(ana["A"]["b_5w_fit_10w_infer"]["VTOP5"]) + " / " + f4(ana["B"]["b_5w_fit_10w_infer"]["VTOP5"])}
     md += ["", "## (b) Kaggle results (entered by the project owner) and validation VTOP5", "", "| file | method | Kaggle public | Kaggle private | validation VTOP5 (REPORT) |", "|---|---|---|---|---|"]
     for fn, (pub, pri) in KAGGLE.items():
-        md.append(f"| {fn} | {pv[fn][0]} | {pub} | {pri} | {f4(pv[fn][1]) if pv[fn][1] is not None else 'not scorable (no held-out users); same recipe on TUNE-fit folds: ' + f4(J11['fold_vtop5_reproduced']['A']) + ' / ' + f4(J11['fold_vtop5_reproduced']['B'])} |")
+        md.append(f"| {fn} | {pv[fn][0]} | {pub} | {pri} | {f4(pv[fn][1]) if pv[fn][1] is not None else no_val[fn]} |")
     diffs = {fn: float(KAGGLE[fn][1]) - pv[fn][1] for fn in KAGGLE if pv[fn][1] is not None}
     md += ["", "The three files that have a validation VTOP5 are ordered the same on validation, Kaggle public and Kaggle private (P < FINAL_vtop5 < STEP7). "
                "Kaggle private minus validation VTOP5 (REPORT): " + ", ".join(f"{fn} {d:+.4f}" for fn, d in diffs.items()) + ". "
-               "This agreement was observed after the fact; no weight or hyperparameter was chosen from a Kaggle number.", ""]
+               "submission_STEP7_all.csv and submission_STEP15.csv have no validation score of their own. "
+               "The step-15 analogue (b) - (a) was " + f"{J15['bootstrap_b_minus_a_vtop5']['pooled']['mean_diff']:+.4f}" + " VTOP5 on validation; STEP15 scored " + f"{float(KAGGLE['submission_STEP15.csv'][1]) - float(KAGGLE['submission_STEP7_all.csv'][1]):+.5f}"
+               + " private vs STEP7_all. This agreement was observed after the fact; no weight, hyperparameter or branch was chosen from a Kaggle number.", ""]
     # (c) hyperparameters
     sys.path.insert(0, str(ROOT / "src"))
     import rerank
@@ -166,6 +181,7 @@ def write_tables():
            f"| repeat rate (validation positives that were also TRAIN positives for the same user) | {d2['repeat_rate_val_positive_also_train_positive']:.3f} |",
            f"| cold start in validation (no TRAIN positive): users with truth / submission users | {d2['eval_a_cold_no_train_positive']} / {d2['submission_cold_no_train_positive']} |",
            f"| final file STEP7_all: submission users without data in weeks 21-30, per component (popularity fallback) | {J11['final']['users_without_component_data']} |",
+           f"| final file STEP15: submission users without data in weeks 11-30, per component (popularity fallback) | {J15['final']['users_without_component_data']} |",
            f"| VTOP5 truth: users / positive pairs / users with exactly 5 truth items | {J5['variant_stats']['VTOP5']['users_with_truth']:,} / {J5['variant_stats']['VTOP5']['positive_pairs']:,} / {J5['variant_stats']['VTOP5']['users_with_exactly_5_truth_items']:,} |", ""]
     # (e) steps 8, 8b, 10
     a8, t8b, t10 = J8["ablation"], J8b["table"], J10["table"]
@@ -183,14 +199,22 @@ def write_tables():
         md.append(f"| 8b | {n} | {f4(m)} | {m - base:+.4f} | no |")
     mm = t10["step7 + multi-scale features"]
     md.append(f"| 10 | step-7 + multi-scale recency features | {f4((mm['A_VTOP5'] + mm['B_VTOP5']) / 2)} | {(mm['A_VTOP5'] + mm['B_VTOP5']) / 2 - base:+.4f} | no |")
+    t15 = J15["table"]
+    m15 = {k: (t15["A"][k]["VTOP5"] + t15["B"][k]["VTOP5"]) / 2 for k in ("a_5w_fit_5w_infer", "b_5w_fit_10w_infer")}
+    md.append(f"| 15 | analogue (a): fit on weeks 16-20, infer with weeks 16-20 (5-week fit, not comparable with the 10-week rows) | {f4(m15['a_5w_fit_5w_infer'])} | {m15['a_5w_fit_5w_infer'] - base:+.4f} | no |")
+    md.append(f"| 15 | analogue (b): fit on weeks 16-20, infer with weeks 11-20 (longer inference window) | {f4(m15['b_5w_fit_10w_infer'])} | {m15['b_5w_fit_10w_infer'] - base:+.4f} | window rule applied to the final run (STEP15) |")
     h = J10["h2_grid"]["chosen"]
+    b15 = J15["bootstrap_b_minus_a_vtop5"]["pooled"]
+    md += ["", f"Step 15: (b) - (a) pooled over both folds {b15['mean_diff']:+.4f}, paired bootstrap 95% CI [{b15['ci95'][0]:+.4f}, {b15['ci95'][1]:+.4f}]; users without H2 data "
+               f"{sum(t15[f]['h2_missing_users']['a_weeks_16_20'] for f in 'AB')} in (a) vs {sum(t15[f]['h2_missing_users']['b_weeks_11_20'] for f in 'AB')} in (b). The step-15 rows are measured against a 5-week fit, so the column 'change vs step 7' is not the relevant comparison; (b) - (a) is."]
     md += ["", f"Step 8 pooled bootstrap of the full new reranker vs step 7 on VTOP5: {J8['bootstrap_new_vs_step7']['VTOP5']['pooled']['mean_diff']:+.4f} "
                f"[{J8['bootstrap_new_vs_step7']['VTOP5']['pooled']['ci95'][0]:+.4f}, {J8['bootstrap_new_vs_step7']['VTOP5']['pooled']['ci95'][1]:+.4f}]. "
                f"Step 10 H2 decay grid (c in 0.5/0.3/0.2/0.1 x T in 60/30/14 days): chosen c = {h['c']}, T = {h['T']}, i.e. unchanged.", "",
            "Step-10 learning curve (step-7 features, VTOP5 on the other fold; users in the training fold):", "", "| share of training-fold users | fold A | fold B |", "|---|---|---|"]
     for fr, d in J10["learning_curve"]["vtop5_by_fraction"].items():
         md.append(f"| {float(fr):.0%} ({d['A_users']} / {d['B_users']} users) | {f4(d['A'])} | {f4(d['B'])} |")
-    md += ["", "100% > 50% in both folds, so by the pre-declared rule the final model was refit on all validation users (step 11, `submission_STEP7_all.csv`)."]
+    md += ["", "100% > 50% in both folds, so by the pre-declared rule the final model was refit on all validation users (step 11, `submission_STEP7_all.csv`).",
+           "Step 15 rule satisfied (b beats a in both folds, pooled CI excludes zero): the final file is `submission_STEP15.csv` (per-week reranker fit on weeks 11-20 features, inference features from weeks 11-30)."]
     (OUT / "report_tables.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 
 
@@ -206,6 +230,11 @@ def update_submissions():
             line = f"| {fn} |{m.group(2)}| {pub} | {pri} |"
         out.append(line)
     text = "\n".join(out)
+    text = text.replace("**Final submission (FINAL) = `submission_STEP7_all.csv`** (public 0.42914, private 0.42244).",
+                        "**Final submission (FINAL) = `submission_STEP15.csv`** (public 0.44903, private 0.44125). Previous final: `submission_STEP7_all.csv` (0.42914 / 0.42244).")
+    text = text.replace("| submission_STEP7_all.csv | step 11 (FINAL):", "| submission_STEP7_all.csv | step 11 (previous final):")
+    text = re.sub(r"(\| submission_STEP15\.csv \|.*?)\| not submitted \| not submitted \|", lambda m: m.group(1) + "| 0.44903 | 0.44125 |", text)
+    text = text.replace("| submission_STEP15.csv | step 15:", "| submission_STEP15.csv | step 15 (FINAL):")
     if "Final submission" not in text:
         text = text.replace("Fill in the two Kaggle columns after each submission.",
                             "Kaggle columns filled by the project owner; files marked \"not submitted\" were never uploaded.\n\n"

@@ -3,8 +3,8 @@
 Course project for a master's recommender-systems exam. Kaggle competition: `sweettv-tv-program-recommender`.
 For each of the 1,260 users in `submission.csv`, predict five programmes (`tv_show_id`) they will watch in ISO weeks 31-42 of 2020, using their view log of weeks 11-30 and the TV schedules. The metric is MAP@5.
 
-**Final submission: `outputs/submissions/submission_STEP7_all.csv`** - a LightGBM (lambdarank) reranker over the top-50 candidates of six scorers (H2, EW, PPR, MF, AR, P-air), refit on all validation users.
-Kaggle: public 0.42914, private 0.42244 (global-popularity baseline: 0.28234 / 0.27809). All submitted files and their scores are in `outputs/submissions/SUBMISSIONS.md`.
+**Final submission: `outputs/submissions/submission_STEP15.csv`** - a LightGBM (lambdarank) reranker over the top-50 candidates of six scorers (H2, EW, PPR, MF, AR, P-air) with window-dependent features expressed per week, fitted on weeks 11-20 features for all validation users and applied to features and candidates from weeks 11-30 (step 15; the window rule was validated on an analogue, see `outputs/validation_step15.md`).
+Kaggle: public 0.44903, private 0.44125 (previous final, step 11, `submission_STEP7_all.csv`: 0.42914 / 0.42244; global-popularity baseline: 0.28234 / 0.27809). All submitted files and their scores are in `outputs/submissions/SUBMISSIONS.md`.
 
 ## Data (not in the repository)
 
@@ -29,12 +29,14 @@ python src/run_step8.py                # step 8: reranker improvements (2-fold s
 python src/run_step8b.py               # step 8b: seed bagging + rank fusion, not shipped
 python src/run_step10.py               # step 10 (8c): H2 decay grid, multi-scale features, learning curve, not shipped
 python src/run_step11.py               # step 11: learning-curve rule -> submission_STEP7_all.csv
-python src/make_final.py --rebuild --out outputs/submissions/repro_STEP7_all.csv   # regenerate the final file from the raw data in one command
+python src/run_step15.py               # step 15: per-week reranker, short-window analogue, rule -> submission_STEP15.csv
+python src/make_final.py --step15 --rebuild --out outputs/submissions/repro_STEP15.csv   # regenerate the FINAL file from the raw data in one command
+python src/make_final.py --rebuild --out outputs/submissions/repro_STEP7_all.csv         # the same for the previous final file (step 11)
 python src/make_examples.py            # outputs/examples.md, outputs/handcheck.md
 python src/make_docs.py                # requirements.txt, outputs/environment.md, outputs/report_tables.md/.csv, Kaggle columns
 ```
 
-Steps must be run in this order: later steps read the JSON reports of earlier ones (chosen hyperparameters, weights). The first run builds the join cache in `outputs/cache/` (git-ignored, about 80 s). `make_final.py` is self-contained (frozen hyperparameters inside), takes `--rebuild` to rebuild the cache and `--out` for the output path (it never overwrites the committed final file unless asked); see `outputs/reproducibility.md` for the hash comparison.
+Steps must be run in this order: later steps read the JSON reports of earlier ones (chosen hyperparameters, weights). The first run builds the join cache in `outputs/cache/` (git-ignored, about 80 s). `make_final.py` is self-contained (frozen hyperparameters inside), takes `--rebuild` to rebuild the cache and `--out` for the output path (it never overwrites a committed submission file unless asked; `--step15` selects the final step-15 recipe); see `outputs/reproducibility.md` for the hash comparison.
 
 ## Validation protocol (5 lines)
 
@@ -42,7 +44,7 @@ Steps must be run in this order: later steps read the JSON reports of earlier on
 2. Temporal split: features/models from weeks 11-20, truth from weeks 21-30; the candidate pool is the set of programmes airing in the target weeks; repeats of already watched programmes are allowed; exactly five distinct ids per user, popularity fill.
 3. Primary truth VTOP5 (the user's five most-completed programmes: airings watched to >= 80%, ties by the global count of such airings); V300, V900 and VHALF (lenient definitions) are robustness checks; the definition follows the public notebook cited below and was not tuned to any leaderboard score.
 4. Users with truth are split 50/50 (seed 42) into TUNE (all choices of hyperparameters and weights) and REPORT (results); later steps use a 2-fold swap (fit on TUNE, score REPORT, and vice versa) with paired bootstrap 95% CIs (2,000 resamples, seed 42).
-5. Decisions were pre-declared (shipping rules in `outputs/validation_step5.md`, "Step 6 - decision rule", and in each step's report); the final model is the step-7 reranker refit on all validation users, applied to features from weeks 21-30 and the 31-42 schedule without re-fitting on test.
+5. Decisions were pre-declared (shipping rules in `outputs/validation_step5.md`, "Step 6 - decision rule", and in each step's report); the final model is the per-week step-7 reranker fitted on all validation users (weeks 11-20 features) and applied to features from weeks 11-30 and the 31-42 schedule without re-fitting on test (step 15); the earlier final model (step 11) used weeks 21-30.
 
 ## Repository layout
 
@@ -51,7 +53,7 @@ Steps must be run in this order: later steps read the JSON reports of earlier on
 
 ## Web demo
 
-A local, library-free page to browse the frozen model: pick a user (search by id, or the two example users A and B), switch between **Validation** (features from weeks 11-20, VTOP5 truth from weeks 21-30, REPORT users only) and **Final run** (weeks 31-42), see the Top-5 of every method with truth hits highlighted, the user's history by category, MAP@5 per method and the Kaggle table. Every number is labelled "from code (JSON)" or "computed in browser". The "Run checks" button runs `web/checks.js` (7 checks that recompute AP@5/MAP@5, validate `submission_STEP7_all.csv` and redo the hand-check overlaps in JavaScript, independent of Python's numbers) and prints the results with `console.table`.
+A local, library-free page to browse the step-11 model (`submission_STEP7_all.csv`; it does not show the step-15 final file, whose lists differ for about 18% of the ids): pick a user (search by id, or the two example users A and B), switch between **Validation** (features from weeks 11-20, VTOP5 truth from weeks 21-30, REPORT users only) and **Final run** (weeks 31-42), see the Top-5 of every method with truth hits highlighted, the user's history by category, and MAP@5 per method. Every number is labelled "from code (JSON)" or "computed in browser". The "Run checks" button runs `web/checks.js` (7 checks that recompute AP@5/MAP@5, validate `submission_STEP7_all.csv` and redo the hand-check overlaps in JavaScript, independent of Python's numbers) and prints the results with `console.table`.
 
 ```
 python src/export_web.py               # rebuilds the validation/final lists from the frozen code -> web/data/web_data.json (about 3 minutes)
