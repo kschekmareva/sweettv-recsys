@@ -16,6 +16,7 @@ import pandas as pd
 import cbf
 import data
 import h2
+import hybrid
 import metrics
 import rerank
 import rerank2
@@ -29,6 +30,22 @@ OUT = data.ROOT / "outputs"
 SUBDIR = OUT / "submissions"
 WEB = data.ROOT / "web" / "data"
 METHODS = ["P", "P-air", "H2", "CBF", "MF", "PPR", "AR", "step-6 blend", "step-7 reranker"]
+
+
+def top50(store, pop_norm, n_u):
+    """Top-50 pool indices (best first) of each of the six candidate generators, same construction as rerank.candidates."""
+    out = {}
+    for n in rerank.ORDER:
+        if n == "P-air":
+            out[n] = np.tile(np.argsort(-pop_norm, kind="stable")[:rerank.TOPN], (n_u, 1))
+        else:
+            out[n] = hybrid.topk(s4.fuse_eps(pop_norm, [store[n]], [1.0]), rerank.TOPN)
+    return out
+
+
+def proposers(t50, row, j):
+    """[[method, rank in its own top-50 (1 = best)], ...] for the methods whose top-50 holds pool index j."""
+    return [[n, int(np.flatnonzero(t50[n][row] == j)[0]) + 1] for n in rerank.ORDER if (t50[n][row] == j).any()]
 
 
 def parse_handcheck():
@@ -99,7 +116,11 @@ def main():
     cand = rerank.candidates(store, ctx["pop_norm"], n_u, n_p, names=rerank.ORDER)
     ri, ci, X, _ = rerank.make_features(ctx, store, ctx["pop_norm"], cand)
     y = T5[ri, ci].astype(int)
-    memb = {n: rerank.candidates(store, ctx["pop_norm"], n_u, n_p, names=[n]) for n in rerank.ORDER}   # which method's top-50 holds each programme
+    t50 = top50(store, ctx["pop_norm"], n_u)                       # which method's top-50 holds each programme, and at which rank
+    _chk = np.zeros_like(cand)
+    for _n in rerank.ORDER:
+        _chk[np.arange(n_u)[:, None], t50[_n]] = True
+    assert (_chk == cand).all()                                       # same candidate set as the reranker used
     seen_val = ctx["train_pos"].groupby("user_id")["tv_show_id"].agg(set)
     tune_truth = tune_rows[ne5[tune_rows]]
     p = np.random.default_rng(SEED).permutation(tune_truth)
@@ -128,7 +149,7 @@ def main():
         vusers[str(uid)] = {"truth": [[i, int(val_done.get((np.uint64(uid), i), 0))] for i in truth], "top": lists,
                             "ap": {m: metrics.ap_at_k(lists[m], tset, K) for m in METHODS},
                             "seen": sorted(int(i) for i in shown if i in sv),
-                            "rr_from": [[n for n in rerank.ORDER if memb[n][r, tops["step-7 reranker"][r][k]]] for k in range(K)]}
+                            "rr_from": [proposers(t50, r, tops["step-7 reranker"][r][k]) for k in range(K)]}
         ids_used |= tset
         for l in lists.values():
             ids_used |= set(l)
@@ -165,9 +186,9 @@ def main():
     ctx_r = s7.make_ctx(["21-30"], "31-42", (31, 42), users_f, pool_f, uc_pairs, inter, cat_series)    # window of the final reranker
     store_r, _ = s7.build_store(ctx_r, ["H2", "PPR", "MF", "AR"], cfg)
     store_r["EW"] = s7.build_store(ctx_r, ["EW"], cfg, ew_cfg)[0]["EW"]
-    memb_r = {n: rerank.candidates(store_r, ctx_r["pop_norm"], nf, len(pool_f), names=[n]) for n in rerank.ORDER}
+    t50_r = top50(store_r, ctx_r["pop_norm"], nf)
     pix_f = {int(x): j for j, x in enumerate(pool_f)}
-    frr_from = [[[n for n in rerank.ORDER if memb_r[n][i, pix_f[x]]] for x in flists["step-7 reranker"][i]] for i in range(nf)]
+    frr_from = [[proposers(t50_r, i, pix_f[x]) for x in flists["step-7 reranker"][i]] for i in range(nf)]
     print("final reranker items outside every top-50 list:", sum(1 for r in frr_from for b in r if not b))
 
     # ---- history: completed airings (view_pct >= 0.8) by category, weeks 11-20 and 21-30 (counts only)

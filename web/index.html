@@ -11,6 +11,31 @@
   <h1>What would we recommend to this viewer?</h1>
   <p class="lead">Pick a sweet.tv user and see the five TV programmes the final model recommends, how it chose them, and how other methods compare.</p>
 
+  <section class="panel">
+    <details id="howto" open>
+      <summary>How to read this page</summary>
+      <div class="ex">
+        <div class="excard">
+          <div class="card hit sample">
+            <span class="rk">#2</span><span class="co c1">1</span>
+            <div class="t"><span class="chk">&#10003; </span><span class="co c6">6</span>М/с 'Губка Боб Квадратные Штаны'<span class="co c2">2</span></div>
+            <div class="tags"><span class="cat" style="background:hsl(150,45%,42%)">Детям</span><span class="co c3">3</span><span class="seen">seen before</span><span class="co c4">4</span></div>
+            <div class="badges"><span class="badge">H2 #1</span><span class="badge">PPR #3</span><span class="co c5">5</span></div>
+          </div>
+        </div>
+        <ol class="callouts">
+          <li><b>Rank</b> of the recommendation in this row, #1 is the best guess.</li>
+          <li><b>Title</b> (shortened, the full title appears when you hover).</li>
+          <li><b>Category</b> of the programme.</li>
+          <li><b>seen before / new</b>: whether the user watched this programme in the feature weeks.</li>
+          <li><b>Method badges</b>: the simple methods that proposed it and the rank in their own top-50 (final model only).</li>
+          <li><b>Green border and check</b>: a hit, the user really watched it most in weeks 21-30 (Validation mode only).</li>
+        </ol>
+      </div>
+      <p>Each row is one method's five recommendations, in order. Green cards are programmes the user really watched most in weeks 21-30. Final run shows the future weeks (31-42), so there are no hits.</p>
+    </details>
+  </section>
+
   <section class="panel" id="controls">
     <div class="row">
       <div class="seg" role="group" aria-label="Mode">
@@ -20,10 +45,13 @@
       <span class="hint" id="modehint"></span>
     </div>
     <div class="row">
-      <div class="search">
-        <input id="q" type="search" placeholder="Search user id..." autocomplete="off" aria-label="Search user id">
-        <ul id="sugg" hidden></ul>
-      </div>
+      <input id="q" type="search" placeholder="Filter users by id..." autocomplete="off" aria-label="Filter users by id">
+      <span class="hint" id="ucount"></span>
+    </div>
+    <div class="row">
+      <select id="usel" aria-label="User"></select>
+    </div>
+    <div class="row">
       <button id="ex-A">User A</button>
       <button id="ex-B">User B</button>
       <button id="rnd">Random user</button>

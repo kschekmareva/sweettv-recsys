@@ -4,9 +4,22 @@
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
   const FINAL = "step-7 reranker";
   const BADGE = { "P-air": "popularity" };
+  const DESC = {
+    "P": "most watched by all users", "P-air": "popular and airs often in the target weeks", "H2": "what this user completed most, recent weeks weigh more",
+    "CBF": "similar category, genre, director and actors", "MF": "what users with similar taste watch (matrix factorization)",
+    "PPR": "random walk on the user-programme graph from this user", "AR": "programmes often watched together with this user's programmes",
+    "step-6 blend": "weighted mix of P-air, MF, PPR, H2"};
   let D, mode = "val", uid = null;
+  const infoCache = {};
 
-  const shortTitle = t => { const s = String(t).split(/[.,]/)[0].trim(); return s || String(t); };
+  // 'ТСН. Неделя'. -> ТСН. Неделя ; "'Name'. Description." -> Name ; prefixes (М/с, Х/ф, Т/с) are kept; cut at 40 characters
+  function shortTitle(t) {
+    let s = String(t).trim();
+    const m = s.match(/^['"«“](.+?)['"»”]\s*(?:[.,]|$)/);
+    if (m) { s = m[1]; if ((s.match(/'/g) || []).length % 2) s += "'"; }
+    else s = s.replace(/\.$/, "");
+    return s.length > 40 ? s.slice(0, 39).replace(/[\s,.]+$/, "") + "…" : s;
+  }
   const hue = c => { let h = 0; for (const ch of c) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
   const users = () => (mode === "val" ? Object.keys(D.validation.users) : D.final.template);
 
@@ -17,6 +30,7 @@
     if (o.hit) t.append(el("span", "chk", "✓ "));
     t.append(shortTitle(p[0]));
     c.title = p[0];
+    if (o.rank) c.append(el("span", "rk", "#" + o.rank));
     c.append(t);
     const tags = el("div", "tags"), cat = el("span", "cat", p[1]);
     cat.style.background = "hsl(" + hue(p[1]) + ",45%,42%)";
@@ -24,49 +38,66 @@
     if (o.seen !== undefined) tags.append(el("span", "seen", o.seen ? "seen before" : "new"));
     if (o.extra) tags.append(el("span", "seen", o.extra));
     c.append(tags);
-    if (o.badges && o.badges.length) { const b = el("div", "badges"); o.badges.forEach(n => b.append(el("span", "badge", BADGE[n] || n))); c.append(b); }
+    if (o.badges && o.badges.length) {
+      const b = el("div", "badges");
+      o.badges.forEach(([n, r]) => b.append(el("span", "badge", (BADGE[n] || n) + " #" + r)));
+      c.append(b);
+    }
     return c;
   }
 
-  // one method row: name, AP@5 (browser) with check mark, hits, cards
+  // one method row: name (+ description), AP@5 computed in the browser with a check mark, hits, five cards
   function methodRow(m, ids, cls, ctx) {
+    const compact = cls.includes("compact");
     const row = el("div", "mrow " + cls), head = el("div", "rowhead");
-    head.append(el("span", "nm", m === FINAL ? "Final model (step-7 reranker)" : m));
-    const hitSet = ctx.truth;
-    if (hitSet) {
-      const ap = WebChecks.ap5(ids, ctx.truthIds), py = ctx.u.ap[m];
-      const hits = new Set(ids.filter(i => hitSet.has(String(i)))).size;
-      head.append(el("span", "ap", "AP@5 " + ap.toFixed(4)));
-      const ok = el("span", "ok", Math.abs(ap - py) < 1e-9 ? "✓" : "✗ differs from Python");
-      ok.title = Math.abs(ap - py) < 1e-9 ? "matches the Python value" : "does not match the Python value " + py.toFixed(4);
-      head.append(ok, el("span", "muted", "hits: " + hits + " of 5"));
+    const nm = el("span", "nm", m === FINAL ? "Final model (step-7 reranker)" : m);
+    if (compact && DESC[m]) nm.append(el("span", "desc", DESC[m]));
+    head.append(nm);
+    if (ctx.truth) {
+      const ap = WebChecks.ap5(ids, ctx.truthIds), py = ctx.u.ap[m], same = Math.abs(ap - py) < 1e-9;
+      const hits = new Set(ids.filter(i => ctx.truth.has(String(i)))).size;
+      const stat = el("span", compact ? "stat" : "");
+      const ok = el("span", "ok", same ? "✓" : "✗ differs from Python");
+      ok.title = same ? "matches the Python value" : "does not match the Python value " + py.toFixed(4);
+      stat.append(el("span", "ap", "AP@5 " + ap.toFixed(4) + " "), ok, el("span", "muted", " hits: " + hits + " of 5"));
+      if (compact) head.append(stat); else head.append(...stat.childNodes);
+      if (m === FINAL) ctx.fin = { hits, ap };
     }
     const cs = el("div", "cards");
     ids.forEach((id, k) => cs.append(card(id, {
-      hit: hitSet && hitSet.has(String(id)), seen: ctx.seen.has(id),
-      badges: m === FINAL ? ctx.from[k] : null })));
+      rank: k + 1, hit: ctx.truth && ctx.truth.has(String(id)), seen: ctx.seen.has(id), badges: m === FINAL ? ctx.from[k] : null })));
     row.append(head, cs);
     return row;
   }
 
-  function renderSugg() {
-    const q = $("q").value.trim(), ul = $("sugg");
-    ul.replaceChildren();
-    if (!q) { ul.hidden = true; return; }
-    const hit = users().filter(u => u.includes(q)).slice(0, 8);
-    hit.forEach(u => { const li = el("li", "", u); li.onmousedown = e => { e.preventDefault(); select(u); }; ul.append(li); });
-    if (!hit.length) ul.append(el("li", "muted", "No user in this mode matches"));
-    ul.hidden = false;
+  // dropdown of all users of the current mode: "<id> - N completed airings, mostly <category>", N descending
+  function userInfo(u) {
+    const h = D.history[u] || { "11-20": {}, "21-30": {} }, tot = {}; let n = 0;
+    (mode === "val" ? ["11-20"] : ["11-20", "21-30"]).forEach(w => Object.entries(h[w]).forEach(([c, k]) => { tot[c] = (tot[c] || 0) + k; n += k; }));
+    const top = Object.entries(tot).sort((a, b) => b[1] - a[1])[0];
+    return { n, cat: top ? top[0] : null };
+  }
+  function fillSelect() {
+    if (!infoCache[mode]) { const o = {}; users().forEach(u => { o[u] = userInfo(u); }); infoCache[mode] = o; }
+    const info = infoCache[mode], q = $("q").value.trim(), sel = $("usel");
+    const list = users().filter(u => !q || u.includes(q)).sort((a, b) => info[b].n - info[a].n);
+    sel.replaceChildren();
+    list.forEach(u => {
+      const o = el("option", "", u + " - " + (info[u].n ? info[u].n + " completed airings, mostly " + info[u].cat : "no completed airings"));
+      o.value = u; sel.append(o);
+    });
+    if (!list.length) { const o = el("option", "", "No user matches"); o.disabled = true; sel.append(o); }
+    $("ucount").textContent = list.length + " of " + users().length + " users";
+    if (list.includes(uid)) sel.value = uid;
+    return list;
   }
 
   function profileText() {
-    const h = D.history[uid] || { "11-20": {}, "21-30": {} };
-    const wk = mode === "val" ? ["11-20"] : ["11-20", "21-30"], label = mode === "val" ? "weeks 11-20" : "weeks 11-30";
-    const tot = {}; let n = 0;
-    wk.forEach(w => Object.entries(h[w]).forEach(([c, k]) => { tot[c] = (tot[c] || 0) + k; n += k; }));
-    if (!n) return "No completed airings in " + label + ".";
-    const top = Object.entries(tot).sort((a, b) => b[1] - a[1])[0];
-    return n + " completed airings in " + label + ", " + Math.round(100 * top[1] / n) + "% " + top[0];
+    const i = infoCache[mode][uid] || userInfo(uid), label = mode === "val" ? "weeks 11-20" : "weeks 11-30";
+    if (!i.n) return "No completed airings in " + label + ".";
+    const h = D.history[uid], tot = {};
+    (mode === "val" ? ["11-20"] : ["11-20", "21-30"]).forEach(w => Object.entries(h[w]).forEach(([c, k]) => { tot[c] = (tot[c] || 0) + k; }));
+    return i.n + " completed airings in " + label + ", " + Math.round(100 * tot[i.cat] / i.n) + "% " + i.cat;
   }
 
   function render() {
@@ -85,19 +116,24 @@
       const box = el("div", "truthbox");
       box.append(el("h3", "", "What this user actually watched most in weeks 21-30 (the answer we try to guess)"));
       const cs = el("div", "cards");
-      u.truth.forEach(x => cs.append(card(x[0], { seen: ctx.seen.has(x[0]), extra: x[1] + " completed" })));
+      u.truth.forEach((x, k) => cs.append(card(x[0], { rank: k + 1, seen: ctx.seen.has(x[0]), extra: x[1] + " completed" })));
       box.append(cs); tb.append(box);
-      const l1 = el("div"), s1 = el("span", "sw g"); l1.append(s1, "Green card with a check mark: the user actually watched this among their top-5 programmes in weeks 21-30 (a hit).");
-      const l2 = el("div"), s2 = el("span", "sw"); l2.append(s2, "White card: not among them.");
+      const l1 = el("div"), l2 = el("div");
+      l1.append(el("span", "sw g"), "Green card with a check mark: the user actually watched this among their top-5 programmes in weeks 21-30 (a hit).");
+      l2.append(el("span", "sw"), "White card: not among them.");
       lg.append(l1, l2, el("div", "", "Grey tag “seen before”: the user watched this programme in the feature weeks (11-20). Tag “new”: not watched there."));
     } else {
-      const i = D.final.template.indexOf(uid), sv = new Set(D.final.seen[i]);
-      ctx = { u: null, truth: null, seen: sv, from: D.final.rr_from[i] };
+      const i = D.final.template.indexOf(uid);
+      ctx = { u: null, truth: null, seen: new Set(D.final.seen[i]), from: D.final.rr_from[i] };
       lists = {}; D.final.methods.forEach(m => { lists[m] = D.final.lists[m][i]; });
       lg.append(el("div", "", "Weeks 31-42 are the future: no answers are available, so no hits are shown."),
                 el("div", "", "Grey tag “seen before”: the user watched this programme in weeks 11-30. Tag “new”: not watched there."));
     }
-    fin.append(methodRow(FINAL, lists[FINAL], "big final", ctx));
+    const frow = methodRow(FINAL, lists[FINAL], "big final", ctx);
+    if (mode === "val") {
+      fin.append(el("p", "summary", "The final model found " + ctx.fin.hits + " of the user's " + ctx.truthIds.length + " most-watched programmes (AP@5 = " + ctx.fin.ap.toFixed(2) + ")."));
+    }
+    fin.append(frow, el("p", "note", "Badges show which simple methods proposed this programme and at which rank in their own top-50; the final model re-ordered these candidates."));
     D.meta.methods.filter(m => m !== FINAL).forEach(m => oth.append(methodRow(m, lists[m], "compact", ctx)));
   }
 
@@ -131,8 +167,12 @@
     });
   }
 
-  function select(u) { uid = u; $("q").value = ""; $("sugg").hidden = true; render(); }
-  function setMode(m) { mode = m; if (!users().includes(uid)) uid = users()[0]; render(); }
+  function select(u) { uid = u; $("q").value = ""; fillSelect(); render(); }
+  function setMode(m) {
+    mode = m; $("q").value = "";
+    if (!users().includes(uid)) uid = users()[0];
+    fillSelect(); render();
+  }
 
   async function run() {
     const csv = () => fetch("../outputs/submissions/submission_STEP7_all.csv").then(x => { if (!x.ok) throw new Error("HTTP " + x.status); return x.text(); });
@@ -146,11 +186,14 @@
     $("m-val").onclick = () => setMode("val"); $("m-fin").onclick = () => setMode("fin");
     ["A", "B"].forEach(t => $("ex-" + t).onclick = () => { mode = "val"; select(D.examples[t]); });
     $("rnd").onclick = () => { const l = users(); select(l[Math.floor(Math.random() * l.length)]); };
-    $("q").oninput = renderSugg;
-    $("q").onblur = () => { $("sugg").hidden = true; };
-    $("q").onkeydown = e => { if (e.key === "Enter") { const f = $("sugg").querySelector("li:not(.muted)"); if (f) select(f.textContent); } };
+    $("q").oninput = () => { const l = fillSelect(); if (l.length && !l.includes(uid)) { uid = l[0]; $("usel").value = uid; render(); } };
+    $("usel").onchange = () => { uid = $("usel").value; render(); };
     $("run").onclick = () => run().catch(e => { $("checkout").textContent = "ERROR: " + e.message; });
-    mode = "val"; uid = D.examples.A; render();
-    if (/[?&]run\b/.test(location.search)) { $("ver").open = true; $("run").click(); }   // ?run runs the checks on load (headless run)
+    mode = "val"; uid = D.examples.A; fillSelect(); render();
+    // headless-run hooks: ?run runs the checks, ?mode=fin starts in Final run, ?open opens the compare section
+    const qs = location.search;
+    if (/[?&]mode=fin\b/.test(qs)) { setMode("fin"); }
+    if (/[?&]open\b/.test(qs)) $("cmp").open = true;
+    if (/[?&]run\b/.test(qs)) { $("ver").open = true; $("run").click(); }
   }).catch(e => { $("utitle").textContent = String(e.message || e); });
 })();
