@@ -49,6 +49,19 @@ Steps must be run in this order: later steps read the JSON reports of earlier on
 - `src/` - code (`data.py` join and interactions, `metrics.py` MAP@5, `baselines.py`, `mf.py`, `cbf.py`, `ppr.py`, `assoc.py`, `h2.py`, `ew.py`, `hybrid.py`, `rerank.py`, `rerank2.py`, `run_*.py` one script per step).
 - `outputs/` - step reports (`validation_step*.md/.json`), `protocol.md`, `report_tables.md/.csv` (consolidated tables), `examples.md` (two example users), `handcheck.md`, `environment.md` (versions, hardware, runtimes), `submissions/` (all submission files and `SUBMISSIONS.md`).
 
+## Web demo
+
+A local, library-free page to browse the frozen model: pick a user (search by id, or the two example users A and B), switch between **Validation** (features from weeks 11-20, VTOP5 truth from weeks 21-30, REPORT users only) and **Final run** (weeks 31-42), see the Top-5 of every method with truth hits highlighted, the user's history by category, MAP@5 per method and the Kaggle table. Every number is labelled "from code (JSON)" or "computed in browser". The "Run checks" button runs `web/checks.js` (7 checks that recompute AP@5/MAP@5, validate `submission_STEP7_all.csv` and redo the hand-check overlaps in JavaScript, independent of Python's numbers) and prints the results with `console.table`.
+
+```
+python src/export_web.py               # rebuilds the validation/final lists from the frozen code -> web/data/web_data.json (about 3 minutes)
+python -m http.server 8000             # from the repository root
+# open http://localhost:8000/web/
+node web/checks_node.js                # optional: the same checks headless, without a browser
+```
+
+`web/data/` is git-ignored because it is derived from competition data; the page code (`web/*.html|js|css`) and `src/export_web.py` are committed.
+
 ## Citation
 
 The airing-level completion truth (VTOP5) and the H2 own-history scorer follow the idea of the public Kaggle notebook by kinahem, "gornyaki final solution": https://www.kaggle.com/code/kinahem/gornyaki-final-solution (concept only; no code was copied).

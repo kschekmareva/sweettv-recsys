@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sweet.tv recommender explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>sweet.tv TV programme recommender - user explorer</h1>
+  <p class="sub">Local demo of the frozen model. Every number is tagged <span class="tag code">from code (JSON)</span> (produced by the Python pipeline) or <span class="tag js">computed in browser</span> (recomputed here in JavaScript from ids and truth).</p>
+</header>
+<main>
+  <section id="controls">
+    <div class="row">
+      <div class="mode" role="group" aria-label="Mode">
+        <button id="m-val" class="on">Validation (weeks 21-30 truth)</button>
+        <button id="m-fin">Final run (weeks 31-42)</button>
+      </div>
+      <button id="ex-A" class="ex">Example user A</button>
+      <button id="ex-B" class="ex">Example user B</button>
+    </div>
+    <div class="row">
+      <label for="q">Search user id</label>
+      <input id="q" type="search" placeholder="type digits of a user id" autocomplete="off">
+      <span id="count" class="muted"></span>
+    </div>
+    <ul id="ulist" aria-label="Matching users"></ul>
+  </section>
+
+  <section id="user">
+    <h2 id="uhead">Loading...</h2>
+    <div id="truthbox"></div>
+    <div id="grid"></div>
+  </section>
+
+  <section>
+    <h2>History by category <span class="muted">(completed airings, view_pct &ge; 0.8)</span> <span class="tag code">from code (JSON)</span></h2>
+    <div id="hist"></div>
+  </section>
+
+  <section>
+    <h2>Methods, validation REPORT users <span class="muted" id="mapn"></span></h2>
+    <table id="maptab"></table>
+  </section>
+
+  <section>
+    <h2>Kaggle results <span class="tag code">from code (JSON)</span></h2>
+    <table id="kaggle"></table>
+  </section>
+
+  <section>
+    <h2>Independent checks</h2>
+    <button id="run">Run checks</button>
+    <span class="muted">Results are also printed with console.table in the browser console.</span>
+    <pre id="checkout"></pre>
+  </section>
+</main>
+<script src="checks.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

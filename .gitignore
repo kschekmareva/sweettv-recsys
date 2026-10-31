@@ -8,3 +8,6 @@ outputs/cache/
 kaggle.json
 *.token
 .env
+
+# derived from competition data (web demo)
+web/data/
