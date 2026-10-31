@@ -99,6 +99,8 @@ def main():
     cand = rerank.candidates(store, ctx["pop_norm"], n_u, n_p, names=rerank.ORDER)
     ri, ci, X, _ = rerank.make_features(ctx, store, ctx["pop_norm"], cand)
     y = T5[ri, ci].astype(int)
+    memb = {n: rerank.candidates(store, ctx["pop_norm"], n_u, n_p, names=[n]) for n in rerank.ORDER}   # which method's top-50 holds each programme
+    seen_val = ctx["train_pos"].groupby("user_id")["tv_show_id"].agg(set)
     tune_truth = tune_rows[ne5[tune_rows]]
     p = np.random.default_rng(SEED).permutation(tune_truth)
     n_va = int(round(0.2 * len(p)))
@@ -121,8 +123,12 @@ def main():
         truth = truth_by_user[uid]
         tset = set(truth)
         lists = {m: [int(pool[x]) for x in tops[m][r]] for m in METHODS}
+        sv = seen_val.get(np.uint64(uid), set())
+        shown = set(truth).union(*[set(l) for l in lists.values()])
         vusers[str(uid)] = {"truth": [[i, int(val_done.get((np.uint64(uid), i), 0))] for i in truth], "top": lists,
-                            "ap": {m: metrics.ap_at_k(lists[m], tset, K) for m in METHODS}}
+                            "ap": {m: metrics.ap_at_k(lists[m], tset, K) for m in METHODS},
+                            "seen": sorted(int(i) for i in shown if i in sv),
+                            "rr_from": [[n for n in rerank.ORDER if memb[n][r, tops["step-7 reranker"][r][k]]] for k in range(K)]}
         ids_used |= tset
         for l in lists.values():
             ids_used |= set(l)
@@ -151,6 +157,18 @@ def main():
     for l in flists.values():
         for row in l:
             ids_used |= set(row)
+    seen_f = ctx_f["train_pos"].groupby("user_id")["tv_show_id"].agg(set)
+    fseen = []
+    for i, u in enumerate(users_f):
+        sv = seen_f.get(np.uint64(u), set())
+        fseen.append(sorted({x for m in METHODS for x in flists[m][i] if x in sv}))
+    ctx_r = s7.make_ctx(["21-30"], "31-42", (31, 42), users_f, pool_f, uc_pairs, inter, cat_series)    # window of the final reranker
+    store_r, _ = s7.build_store(ctx_r, ["H2", "PPR", "MF", "AR"], cfg)
+    store_r["EW"] = s7.build_store(ctx_r, ["EW"], cfg, ew_cfg)[0]["EW"]
+    memb_r = {n: rerank.candidates(store_r, ctx_r["pop_norm"], nf, len(pool_f), names=[n]) for n in rerank.ORDER}
+    pix_f = {int(x): j for j, x in enumerate(pool_f)}
+    frr_from = [[[n for n in rerank.ORDER if memb_r[n][i, pix_f[x]]] for x in flists["step-7 reranker"][i]] for i in range(nf)]
+    print("final reranker items outside every top-50 list:", sum(1 for r in frr_from for b in r if not b))
 
     # ---- history: completed airings (view_pct >= 0.8) by category, weeks 11-20 and 21-30 (counts only)
     show_users = set(vusers) | set(tmpl)
@@ -176,7 +194,7 @@ def main():
          "programmes": {str(i): [str(ttl.get(i, "?")), str(cat_of.get(i, "?"))] for i in sorted(ids_used)},
          "examples": ex,
          "validation": {"map_python": vmap, "users": vusers},
-         "final": {"template": tmpl, "methods": METHODS, "lists": flists, "final_step7_all": flists["step-7 reranker"]},
+         "final": {"template": tmpl, "methods": METHODS, "lists": flists, "final_step7_all": flists["step-7 reranker"], "seen": fseen, "rr_from": frr_from},
          "history": hist, "pool_final": pool_ids, "kaggle": parse_kaggle(), "handcheck": parse_handcheck()}
     WEB.mkdir(parents=True, exist_ok=True)
     p_out = WEB / "web_data.json"
